@@ -1,0 +1,10 @@
+[Tue Jun 16 2015 12:31:14 GMT-0500 (CDT)] INFO Connecting...
+[Tue Jun 16 2015 12:31:14 GMT-0500 (CDT)] ERROR Error: listen EADDRINUSE
+  at exports._errnoException (util.js:746:11)
+  at Server._listen2 (net.js:1156:14)
+  at listen (net.js:1182:10)
+  at net.js:1280:9
+  at dns.js:85:18
+  at process._tickCallback (node.js:355:11)
+
+[Tue Jun 16 2015 12:31:15 GMT-0500 (CDT)] INFO Logged in as balls of Filthy Casuals, but not yet connected
