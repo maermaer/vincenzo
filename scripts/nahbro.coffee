@@ -11,7 +11,6 @@
 # Author:
 #   brianantonelli <brian.antonelli@autotrader.com>
 
-request = require('request')
 token = process.env.HUBOT_SLACK_TOKEN
 botname = process.env.HUBOT_BOT_NAME
 baseURL = 'https://slack.com/api'
