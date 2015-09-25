@@ -9,10 +9,14 @@ module.exports = (robot) ->
   robot.respond /naw bro/i, (msg) ->
     msg.send("My b dawg")
     channel = msg.message.rawMessage.channel
+    msg.send(channel)
+    msg.send(msg.ts)
+    msg.send("ok")
     deleteMessage robot, channel, msg.ts
 
 deleteMessage = (robot, channel, ts) ->
   robot.http("#{baseURL}/chat.delete?token=#{token}&channel=#{channel}&ts=#{ts}")
     .get() (err, res, body) ->
       throw err if err
-      console.log err
+      msg.send(res)
+      msg.send(body)
