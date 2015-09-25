@@ -3,10 +3,14 @@ botname = process.env.HUBOT_BOT_NAME;
 baseURL = 'https://slack.com/api';
 
 module.exports = function(robot) {
-    robot.respond(/is it (weekend|holiday)\s?\?/i, function(msg){
-        var today = new Date();
+  robot.respond(/dank\s?\?/i, function(msg){
+  var today = new Date();
 
-        msg.reply(today.getDay() === 0 || today.getDay() === 6 ? "YES" : "NO");
+  msg.reply(today.getDay() === 0 || today.getDay() === 6 ? "YES" : "NO");
+
+  data = robot.http("#{baseURL}/users.li;st?token=#{token}").get();
+  msg.reply(data);
+
     });
 }
 
