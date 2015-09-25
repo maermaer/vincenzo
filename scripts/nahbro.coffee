@@ -21,7 +21,7 @@ deleteMessage = (robot, channel, ts) ->
       msg.send(res)
       msg.send(body)
 
-getHistory = (channel, cb) ->
+getHistory = (robot, channel, cb) ->
   if (channel.substr(0,1) == "G")
     robot.http("#{baseURL}/groups.history?token=#{token}&channel=#{channel}&count=15").get() (err, res, history) ->
       throw err if err
@@ -31,7 +31,7 @@ getHistory = (channel, cb) ->
       throw err if err
       cb history
 
-getUserId = (username, cb) ->
+getUserId = (robot, username, cb) ->
    robot.http("#{baseURL}/users.list?token=#{token}").get() (err, res, users) ->
     throw err if err
     userid = (user for user in users.members when user.name is username)[0]
@@ -39,7 +39,7 @@ getUserId = (username, cb) ->
 
 # Find Hubot's ID
 hubotid = null
-getUserId botname, (uid) ->
+getUserId robot, botname, (uid) ->
   hubotid = uid
 
 module.exports = (robot) ->
@@ -48,8 +48,8 @@ module.exports = (robot) ->
     if not count then count = 1
     channel = msg.message.rawMessage.channel
 
-    getHistory channel, (history) ->
+    getHistory robot, channel, (history) ->
       messages = (message for message in history.messages when message.user is hubotid)
       messages = messages.slice 0, count
       for msg, i in messages
-        deleteMessage  channel, msg.ts
+        deleteMessage  robot, channel, msg.ts
