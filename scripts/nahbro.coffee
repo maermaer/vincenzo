@@ -16,4 +16,4 @@ deleteMessage = (robot, channel, ts) ->
     .header("Content-Type", "application/x-www-form-urlencoded")
     .post() (err, res, body) ->
       throw err if err
-      console.log deleted
+      console.log err
