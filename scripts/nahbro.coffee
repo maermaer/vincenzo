@@ -32,14 +32,14 @@ getHistory = (robot, channel, cb) ->
       cb history
 
 getUserId = (robot, username, cb) ->
-   robot.http("#{baseURL}/users.list?token=#{token}").get() (err, res, users) ->
+    robot.http("#{baseURL}/users.list?token=#{token}").get() (err, res, users) ->
     throw err if err
     userid = (user for user in users.members when user.name is username)[0]
     cb userid.id
 
 # Find Hubot's ID
 hubotid = null
-getUserId botname, (robot, uid) ->
+getUserId (robot, botname, uid) ->
   hubotid = uid
 
 module.exports = (robot) ->
