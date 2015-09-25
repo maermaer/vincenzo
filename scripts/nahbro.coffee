@@ -10,7 +10,7 @@ module.exports = (robot) ->
     msg.send("My b dawg")
     channel = msg.message.rawMessage.channel
     msg.send(channel)
-    msg.send(msg.ts)
+    msg.send(String(msg.ts))
     msg.send("ok")
     deleteMessage robot, channel, msg.ts
 
