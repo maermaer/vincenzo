@@ -71,6 +71,11 @@ champions = {
     "Embrace the shadow... or die in darkness!",
     "The merest shade of me... is enough to defeat you!",
     "Chris likes bois!"
+  ],
+  lollerblades: [
+    "Chris lieks da bois",
+    "Chris lubs da bois",
+    "Chris especially hot for da lady bois"
   ]
 }
 
