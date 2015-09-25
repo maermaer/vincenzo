@@ -11,6 +11,7 @@ module.exports = (robot) ->
       .header("Authorization", "Bearer #{genius_api_key}")
       .get() (err, res, body) ->
         data = JSON.parse body
+        msg.send(data)
         song_url = data.response.hits[0].result.url
         lyrics_post_data = "link=#{song_url}"
         robot.http(lyrics_api_url)
