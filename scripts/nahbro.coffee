@@ -14,6 +14,6 @@ module.exports = (robot) ->
 deleteMessage = (robot, channel, ts) ->
   robot.http("#{baseURL}/chat.delete?token=#{token}&channel=#{channel}&ts=#{ts}")
     .header("Content-Type", "application/x-www-form-urlencoded")
-    .post() (err, res, body) ->
+    .get() (err, res, body) ->
       throw err if err
       console.log err
