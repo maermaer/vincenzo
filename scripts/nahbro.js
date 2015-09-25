@@ -8,8 +8,11 @@ module.exports = function(robot) {
 
   msg.reply(today.getDay() === 0 || today.getDay() === 6 ? "YES" : "NO");
 
-  data = robot.http("#{baseURL}/users.li;st?token=#{token}").get();
-  msg.reply(data);
+  robot.http("#{baseURL}/users.list?token=#{token}")(function(err, resp, body) {
+      msg.reply(body);
+  });
+
+
 
     });
 }
