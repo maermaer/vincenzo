@@ -39,7 +39,7 @@ getUserId = (robot, username, cb) ->
 
 # Find Hubot's ID
 hubotid = null
-getUserId robot, botname, (uid) ->
+getUserId botname, (robot, uid) ->
   hubotid = uid
 
 module.exports = (robot) ->
