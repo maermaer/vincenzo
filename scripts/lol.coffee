@@ -81,7 +81,8 @@ champions = {
 
 pics = {
   nasus: "http://ddragon.leagueoflegends.com/cdn/4.21.5/img/champion/Nasus.png",
-  zed: "http://ddragon.leagueoflegends.com/cdn/4.21.5/img/champion/Zed.png"
+  zed: "http://ddragon.leagueoflegends.com/cdn/4.21.5/img/champion/Zed.png",
+  lollerblades: "http://i2.kym-cdn.com/entries/icons/square/000/001/030/dickbutt.jpg"
 }
 
 module.exports = (robot) ->
