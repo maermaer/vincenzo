@@ -10,12 +10,9 @@ module.exports = (robot) ->
     robot.http(genius_api_url + query)
       .header("Authorization", "Bearer #{genius_api_key}")
       .get() (err, res, body) ->
-
         data = JSON.parse body
         song_url = data.response.hits[0].result.url
-
         lyrics_post_data = "link=#{song_url}"
-
         robot.http(lyrics_api_url)
           .header("Content-Type", "application/x-www-form-urlencoded")
           .post(lyrics_post_data) (err, res, body) ->
