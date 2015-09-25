@@ -7,8 +7,6 @@ module.exports = (robot) ->
     lyrics_api_url = 'http://genius-api.com/api/lyricsInfo'
     query = msg.match[1]
 
-    msg.send(genius_api_key)
-
     robot.http(genius_api_url + query)
       .header("Authorization", "Bearer #{genius_api_key}")
       .get() (err, res, body) ->
