@@ -69,8 +69,7 @@ champions = {
     "None escape their shadow.",
     "Ignorance is fatal.",
     "Embrace the shadow... or die in darkness!",
-    "The merest shade of me... is enough to defeat you!",
-    "Chris likes bois!"
+    "The merest shade of me... is enough to defeat you!"
   ],
   lollerblades: [
     "Chris lieks da bois",
