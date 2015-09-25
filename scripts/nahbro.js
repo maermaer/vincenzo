@@ -3,7 +3,7 @@ botname = process.env.HUBOT_BOT_NAME;
 baseURL = 'https://slack.com/api';
 
 module.exports = function(robot) {
-  robot.respond(/dank\s?\?/i, function(msg){
+  robot.respond(/dank/i, function(msg){
   var today = new Date();
 
   msg.reply(today.getDay() === 0 || today.getDay() === 6 ? "YES" : "NO");
@@ -11,8 +11,6 @@ module.exports = function(robot) {
   robot.http("#{baseURL}/users.list?token=#{token}")(function(err, resp, body) {
       msg.reply(body);
   });
-
-
 
 });
 }
