@@ -98,7 +98,7 @@ champions = {
     "Take it or GO HOME!",
     "Way to bring your trouble home with you, Fullmetal, really nice.",
     "Nothing's perfect, the world's not perfect, but it's there for us, trying the best it can. That's what makes it so damn beautiful.",
-    (to Hawkeye at Hughes' funeral) "Except... it's a terrible day for rain." Hawkeye, "But, what do you mean? It's not raining." Mustang, "Yes... it is." (as a single tear rolls down his cheek),
+    "(to Hawkeye at Hughes' funeral) Except... it's a terrible day for rain. Hawkeye: But, what do you mean? It's not raining. Mustang: Yes... it is. (as a single tear rolls down his cheek)",
     "I didn't do this for politics! I couldn't forgive myself for being blind this long. This is the only way I could atone for the friends I didn't saved!",
     "Foolish enough to let you prosper on their suffering.",
     "But you're thinking on too large a scale there, kid...if we don't want to drive ourselves crazy..we can only deal with what's directly in front of us.",
