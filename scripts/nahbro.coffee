@@ -17,7 +17,7 @@
 #
 # Author:
 #   Matt Shwery (mshwery)
-   
+#   
 
 _ = require('lodash')
 
@@ -74,7 +74,7 @@ module.exports = (robot) ->
 
     if !channels.length
       # get a list of channels (unfortunately the only way to get channel IDs for the next api call)
-      msg.robot.http("#{baseUrl}/channels.list?token=#{token}&exclude_archived=1").get() (err, res, #body) ->
+      msg.robot.http("#{baseUrl}/channels.list?token=#{token}&exclude_archived=1").get() (err, res, body) ->
         data = JSON.parse(body)
         channels = data.channels
         fetchChannelHistory()
