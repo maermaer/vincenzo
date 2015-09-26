@@ -33,7 +33,7 @@ module.exports = (robot) ->
   hubotName = robot.name
   channels = []
 
-  robot.respond /naw dawg$/i, (msg) ->
+  robot.respond /(naw|no|nein|negative|iie) (dawg|breh|bro|bruh|dog|ghost rider|bien|good|tomodachi|man)$/i, (msg) ->
     channelName = msg.message.room
     botUser = robot.brain.userForName(hubotName)
 
