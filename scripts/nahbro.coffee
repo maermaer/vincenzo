@@ -19,7 +19,7 @@
 #   Matt Shwery (mshwery)
 #   
 
-_ = require('lodash')
+_ = require('./lodash')
 
 baseUrl = 'https://slack.com/api'
 token = process.env.HUBOT_SLACK_TOKEN
