@@ -65,9 +65,9 @@ module.exports = (robot) ->
         url = "#{baseUrl}/#{api_subgroup}.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
         msg.robot.http(url).get() (err, res, body) ->
           data = JSON.parse(body)
-          msg.reply(data)
+          msg.reply(data.toString())
           lastBotMessage = _.find(data.messages, { user: botUser.id })
-
+          msg.reply(lastBotMessage)
           # if we have a message from this bot,
           # lets delete it!
           if lastBotMessage and !_.includes(responses, lastBotMessage.text)
