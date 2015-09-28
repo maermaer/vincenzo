@@ -50,9 +50,11 @@ module.exports = (robot) ->
 
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
-
+      msg.reply(channel)
+      
       if (!channel)
         channel = msg.envelope.message.rawMessage.channel
+        msg.reply(channel)
 
       # now that we may have a channel
       # we can use its id to get that channel's history
