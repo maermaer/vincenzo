@@ -57,7 +57,8 @@ module.exports = (robot) ->
         api_subgroup = "channels"
       else if (group)
         api_subgroup = "groups"
-        channel = group
+        channel = { "id": group }
+
 
       # now that we may have a channel
       # we can use its id to get that channel's history
