@@ -50,16 +50,19 @@ module.exports = (robot) ->
 
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
-      msg.reply(channel)
-      
-      if (!channel)
-        channel = msg.envelope.message.rawMessage.channel
-        msg.reply(channel)
+      group = msg.envelope.message.rawMessage.channel
+
+      api_subgroup = null
+      if (channel)
+        api_subgroup = "channels"
+      else if (group)
+        api_subgroup = "group"
+        channel = group
 
       # now that we may have a channel
       # we can use its id to get that channel's history
       if (channel)
-        url = "#{baseUrl}/channels.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
+        url = "#{baseUrl}/#{api_subgroup}.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
         msg.robot.http(url).get() (err, res, body) ->
           data = JSON.parse(body)
           lastBotMessage = _.find(data.messages, { user: botUser.id })
