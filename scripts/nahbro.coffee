@@ -59,14 +59,12 @@ module.exports = (robot) ->
         api_subgroup = "groups"
         channel = { "id": group }
 
-
       # now that we may have a channel
       # we can use its id to get that channel's history
       if (channel)
         url = "#{baseUrl}/#{api_subgroup}.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
         msg.robot.http(url).get() (err, res, body) ->
           data = JSON.parse(body)
-          msg.reply(body)
           lastBotMessage = _.find(data.messages, { user: botUser.id })
           # if we have a message from this bot,
           # lets delete it!
