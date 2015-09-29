@@ -50,14 +50,17 @@ module.exports = (robot) ->
 
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
-      group = msg.envelope.message.rawMessage.channel
+      other = msg.envelope.message.rawMessage.channel
 
       api_subgroup = null
       if (channel)
         api_subgroup = "channels"
-      else if (group)
-        api_subgroup = "groups"
-        channel = { "id": group }
+      else if (other)
+        channel = { "id": other }
+        if (other.is_group)          
+          api_subgroup = "groups"
+        else
+          api_subgroup = "ims"        
 
       # now that we may have a channel
       # we can use its id to get that channel's history
