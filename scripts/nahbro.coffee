@@ -72,10 +72,8 @@ module.exports = (robot) ->
             lastBotMessage = newmsg.robot.http(url).get() (err, res, body) ->
               datar = JSON.parse(body)
               lastBotMessage = _.find(datar.messages, { user: botUser.id })
+              msg.reply(lastBotMessage)
 
-            msg.reply(lastBotMessage)
-          msg.reply(lastBotMessage)
-          
           # if we have a message from this bot,
           # lets delete it!
           if lastBotMessage and !_.includes(responses, lastBotMessage.text)
