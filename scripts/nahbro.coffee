@@ -68,11 +68,12 @@ module.exports = (robot) ->
           lastBotMessage = _.find(data.messages, { user: botUser.id })
           msg.reply(channel.id)
 
-          if (!lastBotMessage)
+          if (lastBotMessage and !_.includes(responses, lastBotMessage.text)) == false
             url = "#{baseUrl}/im.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
             msg.robot.http(url).get() (err, res, body) ->
               data = JSON.parse(body)
               lastBotMessage = _.find(data.messages, { user: botUser.id })
+              msg.reply("hi")
 
           # if we have a message from this bot,
           # lets delete it!
