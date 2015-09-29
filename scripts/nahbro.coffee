@@ -51,7 +51,6 @@ module.exports = (robot) ->
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
       group = msg.envelope.message.rawMessage.channel
-      msg.reply(msg.envelope)
 
       api_subgroup = null
       if (channel)
@@ -68,6 +67,15 @@ module.exports = (robot) ->
           data = JSON.parse(body)
           lastBotMessage = _.find(data.messages, { user: botUser.id })
 
+          if (!lastBotMessage)
+            url = "#{baseUrl}/im.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
+            lastBotMessage = newmsg.robot.http(url).get() (err, res, body) ->
+              datar = JSON.parse(body)
+              lastBotMessage = _.find(datar.messages, { user: botUser.id })
+
+            msg.reply(lastBotMessage)
+          msg.reply(lastBotMessage)
+          
           # if we have a message from this bot,
           # lets delete it!
           if lastBotMessage and !_.includes(responses, lastBotMessage.text)
