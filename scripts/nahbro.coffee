@@ -67,8 +67,7 @@ module.exports = (robot) ->
           data = JSON.parse(body)
           lastBotMessage = _.find(data.messages, { user: botUser.id })
 
-          msg.reply(lastBotMessage)
-          if (!data)
+          if (!lastBotMessage)
             url = "#{baseUrl}/ims.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
             msg.robot.http(url).get() (err, res, body) ->
               data = JSON.parse(body)
