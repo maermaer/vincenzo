@@ -57,7 +57,7 @@ module.exports = (robot) ->
         api_subgroup = "channels"
       else if (other)
         channel = { "id": other }
-        if (other.is_group)          
+        if (other.is_group == "true")          
           api_subgroup = "groups"
         else
           api_subgroup = "ims"        
