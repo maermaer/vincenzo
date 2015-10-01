@@ -56,7 +56,7 @@ module.exports = (robot) ->
       if (channel)
         api_subgroup = "channels"
       else if (group)
-        api_subgroup = "groups"
+        api_subgroup =  "im" #"groups"
         channel = { "id": group }
 
       # now that we may have a channel
