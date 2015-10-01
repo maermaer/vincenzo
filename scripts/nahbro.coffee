@@ -32,6 +32,7 @@ responses = {
 module.exports = (robot) ->
   hubotName = robot.name
   channels = []
+  groups = []
 
   robot.respond /(naw|no|nein|negative|iie|nah|neh|your b) (friend|dawg|breh|bro|bruh|dog|ghost rider|bien|good|tomodachi|man)$/i, (msg) ->
     channelName = msg.message.room
@@ -50,14 +51,18 @@ module.exports = (robot) ->
 
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
-      group = msg.envelope.message.rawMessage.channel
+      group_or_im_id = msg.envelope.message.rawMessage.channel
 
       api_subgroup = null
       if (channel)
         api_subgroup = "channels"
-      else if (group)
-        api_subgroup =  "im" #"groups"
-        channel = { "id": group }
+      else if (group_or_im_id)
+        is_group = _.find(groups, { name: channelName })
+        channel = { "id": group_or_im_id }
+        if (is_group)
+          api_subgroup = "groups"
+        else
+          api_subgroup = "im"
 
       # now that we may have a channel
       # we can use its id to get that channel's history
@@ -87,6 +92,12 @@ module.exports = (robot) ->
 
     if !botUser
       console.warn "Couldn't find a user for #{hubotName}"
+
+    if !groups.length
+      # get a list of groups
+      msg.robot.http("#{baseUrl}/groups.list?token=#{token}&exclude_archived=1").get() (err, res, body) ->
+        data = JSON.parse(body)
+        groups = data.channels
 
     if !channels.length
       # get a list of channels (unfortunately the only way to get channel IDs for the next api call)
