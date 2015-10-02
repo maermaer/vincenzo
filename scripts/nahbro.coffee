@@ -15,8 +15,9 @@
 # Examples:
 #   hubot naw dawg
 #
-# Author:
+# Authors:
 #   Matt Shwery (mshwery)
+#   Chris Roberts
 #   
 
 _ = require('./lodash')
