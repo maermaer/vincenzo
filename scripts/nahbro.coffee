@@ -57,7 +57,7 @@ module.exports = (robot) ->
         api_subgroup = "channels"
       else if (group_or_im_id)
         is_group = _.find(groups, { name: group_or_im_id })
-        msg.reply(groups)
+        msg.reply(groups.toString())
         channel = { "id": group_or_im_id }
         if (is_group)
           api_subgroup = "groups"
@@ -71,14 +71,6 @@ module.exports = (robot) ->
         msg.robot.http(url).get() (err, res, body) ->
           data = JSON.parse(body)
           lastBotMessage = _.find(data.messages, { user: botUser.id })
-
-          if (!lastBotMessage)
-            url = "#{baseUrl}/im.history?token=#{token}&channel=#{channel.id}&count=#{historyLimit}"
-            newmsg.robot.http(url).get() (err, res, body) ->
-              datar = JSON.parse(body)
-              msg.reply(datar)
-              lbm = _.find(datar.messages, { user: botUser.id })
-              msg.reply(lbm)
 
           # if we have a message from this bot,
           # lets delete it!
