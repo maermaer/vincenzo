@@ -48,7 +48,6 @@ module.exports = (robot) ->
         else
           msg.send responses.error
 
-
     fetchChannelHistory = () ->
       channel = _.find(channels, { name: channelName })
       group_or_im_id = msg.envelope.message.rawMessage.channel
@@ -98,7 +97,7 @@ module.exports = (robot) ->
       # get a list of groups
       msg.robot.http("#{baseUrl}/groups.list?token=#{token}&exclude_archived=1").get() (err, res, body) ->
         data = JSON.parse(body)
-        groups = data.channels
+        groups = data.groups
 
     if !channels.length
       # get a list of channels (unfortunately the only way to get channel IDs for the next api call)
