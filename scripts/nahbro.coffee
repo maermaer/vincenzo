@@ -38,7 +38,6 @@ module.exports = (robot) ->
     channelName = msg.message.room
     botUser = robot.brain.userForName(hubotName)
 
-
     deleteMessage = (message, channel) ->
       url = "#{baseUrl}/chat.delete?token=#{token}&channel=#{channel.id}&ts=#{message.ts}"
       msg.robot.http(url).get() (err, res, body) ->
@@ -56,8 +55,7 @@ module.exports = (robot) ->
       if (channel)
         api_subgroup = "channels"
       else if (group_or_im_id)
-        is_group = _.find(groups, { name: group_or_im_id })
-        msg.reply(groups.toString())
+        is_group = _.find(groups, { id: group_or_im_id })
         channel = { "id": group_or_im_id }
         if (is_group)
           api_subgroup = "groups"
