@@ -1,7 +1,6 @@
 replaceAll = (find, replace, str) ->
   return str.replace(new RegExp(find, 'g'), replace)
 
-
 module.exports = (robot) ->
   active = false
   topic = "nothing"
