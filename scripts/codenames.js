@@ -27,7 +27,7 @@ module.exports = function(robot) {
           }
         }
 
-         for(i=0; i<5;i++)
+        for(i=0; i<5;i++)
         {
           msg.reply(rand_words[i]);
         }
