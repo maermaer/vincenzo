@@ -30,7 +30,8 @@ module.exports = function(robot) {
           {
             var index = Math.floor(Math.random() * words.length);
             var word = words[index];
-            rand_words[i][j] = word; //+ format_spaces(word);
+            var spaces = format_spaces(word);
+            rand_words[i][j] = word + spaces;
           }
         }
 
