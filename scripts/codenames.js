@@ -15,6 +15,13 @@
 //10. allow game end
 
 module.exports = function(robot) {
+  var red_team = [];
+  var blue_team = [];
+
+  robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
+
+    });
+
     robot.respond(/gimme the board\s?/i, function(msg){
 
         var rand_words = new Array(5);
@@ -23,7 +30,7 @@ module.exports = function(robot) {
           rand_words[i] = new Array(5);
           for(j=0;j<5;j++)
           {
-            rand_words[i][j] = "[" + words[Math.floor(Math.random() * words.length)] + "] ";
+            rand_words[i][j] = words[Math.floor(Math.random() * words.length)] + " | ";
           }
         }
 
@@ -33,6 +40,23 @@ module.exports = function(robot) {
         }
     });
 }
+
+canned_responses = [ "That team is full.",
+"The game is already running.",
+"There isn't a game running.",
+"Blue team wins!",
+"Red team wins!",
+"I've added you to that team.",
+"Your team consists of: ",
+" is your team captain.",
+"The current score is: ",
+"The teams are imbalanced.",
+"It's blue team's turn.",
+"It's red team's turn.",
+"A timer has been started!",
+"Time left: ",
+"Oh no! You've selected the black square!"
+]
 
 words = ["Acne",
 "Acre",
