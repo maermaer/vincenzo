@@ -1,15 +1,18 @@
-// Description:
-//   holiday detector script
 //
-// Dependencies:
-//   None
-//
-// Configuration:
-//   None
-//
-// Commands:
-//   hubot is it weekend ?  - returns whether is it weekend or not
-//   hubot is it holiday ?  - returns whether is it holiday or not
+//2. allow creation of teams with team leads
+//3. setup timers
+//4. setup key map
+//whats the size of the board? 6x6?
+//5. setup board
+//johnknewwhen [3:28 PM]
+//5x5
+//turkish_muffin_bttn [3:28 PM]
+//6. allow people to choose answers
+//7. allow certain game conditions to be met (win/loss/draw)
+//8. allow game reset
+//9. allow scorekeeping
+//(in-round and between rounds)
+//10. allow game end
 
 module.exports = function(robot) {
     robot.respond(/what say you\s?\?/i, function(msg){
@@ -17,10 +20,10 @@ module.exports = function(robot) {
         var rand_words = [];
         for(i=0; i<5;i++)
         {
-          rand_array.push(words[Math.floor(Math.random() * words.length)]);
+          rand_words.push(words[Math.floor(Math.random() * words.length)]);
         }
 
-        msg.reply(rand_array);
+        msg.reply(rand_words);
     });
 }
 
