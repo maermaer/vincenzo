@@ -1,18 +1,16 @@
-//
+//1. setup game loop
 //2. allow creation of teams with team leads
 //3. setup timers
 //4. setup key map
-//whats the size of the board? 6x6?
-//5. setup board
-//johnknewwhen [3:28 PM]
-//5x5
-//turkish_muffin_bttn [3:28 PM]
+//5. setup board --done
 //6. allow people to choose answers
 //7. allow certain game conditions to be met (win/loss/draw)
 //8. allow game reset
 //9. allow scorekeeping
 //(in-round and between rounds)
 //10. allow game end
+//11. setup turn switching
+//12. setup clue giving
 
 module.exports = function(robot) {
   var red_team = [];
@@ -51,6 +49,7 @@ canned_responses = [ "That team is full.",
 " is your team captain.",
 "The current score is: ",
 "The teams are imbalanced.",
+"The game has started!",
 "It's blue team's turn.",
 "It's red team's turn.",
 "A timer has been started!",
