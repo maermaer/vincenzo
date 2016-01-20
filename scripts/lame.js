@@ -13,9 +13,9 @@
 
 module.exports = function(robot) {
     robot.respond(/what say you\s?\?/i, function(msg){
-        var rand = words[Math.floor(Math.random() * myArray.length)];
+        //var rand = words[Math.floor(Math.random() * myArray.length)];
 
-        msg.reply(rand);
+        msg.reply(words[1]);
     });
 }
 
