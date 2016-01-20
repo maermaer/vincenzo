@@ -23,7 +23,7 @@ module.exports = function(robot) {
           rand_words[i] = new Array(5);
           for(j=0;j<5;j++)
           {
-            rand_words[i].push("[" + words[Math.floor(Math.random() * words.length)] + "] ");
+            rand_words[i][j] = "[" + words[Math.floor(Math.random() * words.length)] + "] ";
           }
         }
 
