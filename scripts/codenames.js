@@ -28,8 +28,8 @@ module.exports = function(robot) {
           rand_words[i] = new Array(5);
           for(j=0;j<5;j++)
           {
-            index = Math.floor(Math.random() * words.length);
-            word =  words[index];
+            var index = Math.floor(Math.random() * words.length);
+            var word =  words[index];
             rand_words[i][j] = word + format_spaces(word) + "| ";
           }
         }
