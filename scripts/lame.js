@@ -17,7 +17,7 @@
 module.exports = function(robot) {
     robot.respond(/what say you\s?\?/i, function(msg){
 
-        var rand_words = [][];
+        var rand_words = [];
         for(i=0; i<5;i++)
         {
           for(j=0;j<5;j++)
