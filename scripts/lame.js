@@ -15,7 +15,7 @@
 //10. allow game end
 
 module.exports = function(robot) {
-    robot.respond(/gimme the board\s?\?/i, function(msg){
+    robot.respond(/gimme the board\s?/i, function(msg){
 
         var rand_words = new Array(5);
         for(i=0; i<5;i++)
