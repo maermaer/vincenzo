@@ -20,13 +20,17 @@ module.exports = function(robot) {
         var rand_words = new Array(5);
         for(i=0; i<5;i++)
         {
+          rand_words[i] = new Array(5);
           for(j=0;j<5;j++)
           {
             rand_words[i].push("[" + words[Math.floor(Math.random() * words.length)] + "] ");
           }
         }
 
-        msg.reply(rand_words);
+         for(i=0; i<5;i++)
+        {
+          msg.reply(rand_words[i]);
+        }
     });
 }
 
