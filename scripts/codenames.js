@@ -28,7 +28,9 @@ module.exports = function(robot) {
           rand_words[i] = new Array(5);
           for(j=0;j<5;j++)
           {
-            rand_words[i][j] = words[Math.floor(Math.random() * words.length)] + " | ";
+            index = Math.floor(Math.random() * words.length);
+            word =  words[index];
+            rand_words[i][j] = word + format_spaces(word) + "| ";
           }
         }
 
@@ -37,6 +39,16 @@ module.exports = function(robot) {
           msg.reply(rand_words[i]);
         }
     });
+}
+
+function format_spaces(word){
+  space = "";
+  times = 10 - word.length;
+  for(j=0;j<times;j++)
+  {
+    space += " ";
+  }
+  return space;
 }
 
 canned_responses = [ "That team is full.",
