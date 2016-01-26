@@ -17,7 +17,7 @@ module.exports = function(robot) {
   var blue_team = [];
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
-
+    msg.reply("Welcome to " + msg.match[1] + " team!");
     });
 
     robot.respond(/gimme the board\s?/i, function(msg){
