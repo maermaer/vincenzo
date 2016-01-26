@@ -33,7 +33,8 @@ module.exports = function(robot) {
           {
             var index = Math.floor(Math.random() * words.length);
             var word = words[index];
-            rand_words[i][j] = word;
+            var spaces = format_spaces(word);
+            rand_words[i][j] = word + spaces;
           }
         }
 
@@ -47,7 +48,15 @@ module.exports = function(robot) {
 
       });
     }
-
+function format_spaces(word){
+   var space = "";
+   var times = 10 - word.length;
+   for(j=0;j<times;j++)
+   {
+     space += " ";
+   }
+   return space;
+ }
 
 canned_responses = [ "WELCOME TO CODENAMES! HOLD ON TO YOUR NUTS!",
 "That team is full.",
