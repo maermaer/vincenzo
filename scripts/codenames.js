@@ -25,7 +25,6 @@ module.exports = function(robot) {
     });
 
     robot.respond(/gimme the board\s?/i, function(msg){
-
         var rand_words = new Array(5);
         for(i=0; i<5;i++)
         {
@@ -41,21 +40,15 @@ module.exports = function(robot) {
 
       var tempStr = '```';
       for(i=0; i<5;i++)
-      {  tempStr += rand_words[i] + '"\n"';
-      }tempStr += '```';
-      msg.reply(tempStr);
-          });
+      {
+        tempStr += rand_words[i].join(",") + '"\n"';
       }
+      tempStr += '```';
+      msg.reply(tempStr);
 
-function format_spaces(word){
-  var space = "";
-  var times = 10 - word.length;
-  for(j=0;j<times;j++)
-  {
-    space += " ";
-  }
-  return space;
-}
+      });
+    }
+
 
 canned_responses = [ "WELCOME TO CODENAMES! HOLD ON TO YOUR NUTS!",
 "That team is full.",
