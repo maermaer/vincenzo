@@ -54,7 +54,7 @@ function format_spaces(word){
    var times = 10 - word.length;
    for(j=0;j<times;j++)
    {
-     space += " ";
+     space.concat(" ");
    }
    return space;
  }
