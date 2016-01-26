@@ -16,6 +16,10 @@ module.exports = function(robot) {
   var red_team = [];
   var blue_team = [];
 
+  robot.respond(/start the game\s?/i, function(msg){
+    msg.reply(canned_responses[0]);
+    });
+
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
@@ -52,7 +56,8 @@ function format_spaces(word){
   return space;
 }
 
-canned_responses = [ "That team is full.",
+canned_responses = [ "WELCOME TO CODENAMES! HOLD ON TO YOUR NUTS!",
+"That team is full.",
 "The game is already running.",
 "There isn't a game running.",
 "Blue team wins!",
