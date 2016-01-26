@@ -21,7 +21,7 @@ module.exports = function(robot) {
     });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
-    msg.reply("Welcome to " + msg.match[1] + " team!");
+    msg.reply("Welcome to " + msg.match[1] + " te am!");
     });
 
     robot.respond(/gimme the board\s?/i, function(msg){
@@ -41,7 +41,7 @@ module.exports = function(robot) {
 
         for(i=0; i<5;i++)
         {
-          msg.reply(rand_words[i]);
+          msg.reply('`' + rand_words[i] + '`');
         }
     });
 }
