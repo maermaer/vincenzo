@@ -40,12 +40,12 @@ module.exports = function(robot) {
         }
 
       var tempStr = '```';
-for(i=0; i<5;i++)
-{  tempStr += rand_words[i];
-}tempStr += '```';
-msg.reply(tempStr);
-    });
-}
+      for(i=0; i<5;i++)
+      {  tempStr += rand_words[i] + '"\n"';
+      }tempStr += '```';
+      msg.reply(tempStr);
+          });
+      }
 
 function format_spaces(word){
   var space = "";
