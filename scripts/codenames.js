@@ -50,22 +50,21 @@ module.exports = function(robot) {
   robot.respond(/gimme the board\s?/i, function(msg){
     formatted_board = format_board(the_board);
     msg.reply(formatted_board);
-
+  });
      // Simple static queries.
   // Match canned requests with canned responses.
   robot.respond(/(what is)|(what's) the score\s?/i, function(msg){
     msg.reply(canned_responses[0]);
     });
 
-  robot.respond(/i'm the leader/, function(msg){
+  robot.respond(/i'm the leader\s?/i, function(msg){
     msg.reply(canned_responses[1]);
     });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
-  }
-  });
+};
 
 canned_requests = [];
 
