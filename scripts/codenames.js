@@ -12,6 +12,24 @@
 //11. setup turn switching
 //12. setup clue giving
 
+var get_row = function(){
+  var rand_words = new Array(5);
+  for(i=0; i<5;i++)
+  {
+    index = Math.floor(Math.random() * words.length);
+    word = words[index];
+    spaces = "";
+    times = 15 - word.length;
+    for(j=0;j<times;j++)
+    {
+      spaces += " ";
+    }
+    var the_word = word + spaces;
+    rand_words[i] = the_word;
+  }
+    return rand_words;
+}
+
 module.exports = function(robot) {
   // Basic game setup
   var red_team = [];
@@ -34,23 +52,7 @@ var format_board = function(board){
   return tempStr;
 }
 
-var get_row = function(){
-  var rand_words = new Array(5);
-  for(i=0; i<5;i++)
-  {
-    index = Math.floor(Math.random() * words.length);
-    word = words[index];
-    spaces = "";
-    times = 15 - word.length;
-    for(j=0;j<times;j++)
-    {
-      spaces += " ";
-    }
-    var the_word = word + spaces;
-    rand_words[i] = the_word;
-  }
-    return rand_words;
-}
+
 
   // Simple static queries.
   // Match canned requests with canned responses.
