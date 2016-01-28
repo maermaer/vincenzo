@@ -13,41 +13,52 @@
 //12. setup clue giving
 
 module.exports = function(robot) {
-
   // Basic game setup
   var red_team = [];
   var blue_team = [];
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
-      var rand_words = new Array(5);
-      for(i=0; i<5;i++)
-      {
-        rand_words[i] = new Array(5);
-        for(j=0;j<5;j++)
-        {
-          index = Math.floor(Math.random() * words.length);
-          word = words[index];
-          spaces = "   ";
-          times = 20 - word.length;
-          for(j=0;j<word.length;j++)
-          {
-            spaces = spaces.concat(" ");
-          }
-          rand_words[i][j] = word.concat(spaces);
-         // msg.reply(rand_words[i][j]);
-        }
-      }
 
-    var tempStr = '```';
+    board = new Array(5);
+
     for(i=0; i<5;i++)
     {
-      tempStr += rand_words[i] + '\n';
+      board[i] = get_row();
+    }
+
+    formatted_board = format_board(board);
+
+    msg.reply(formatted_board);
+  });
+
+var format_board = function(board){
+   var tempStr = '```';
+    for(i=0; i<5;i++)
+    {
+      tempStr += board[i].toString() + '\n';
     }
     tempStr += '```';
-    msg.reply(rand_words);
+  return tempStr;
+}
 
-  });
+var get_row = function(){
+  var rand_words = new Array(5);
+  for(i=0; i<5;i++)
+  {
+    index = Math.floor(Math.random() * words.length);
+    word = words[index];
+    spaces = "";
+    times = 20 - word.length;
+    for(j=0;j<times;j++)
+    {
+      spaces += " ";
+    }
+    var the_word = word + spaces;
+    rand_words[i] = the_word;
+  }
+    return rand_words;
+}
 
   // Simple static queries.
   // Match canned requests with canned responses.
@@ -94,7 +105,7 @@ words = ["Acne",
 "Ankle",
 "Apathy",
 "Applause",
-"Applesauc",
+"Applesauce",
 "Application",
 "Archaeologist",
 "Aristocrat",
