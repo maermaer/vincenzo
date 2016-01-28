@@ -20,12 +20,7 @@ module.exports = function(robot) {
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
 
-    board = new Array(5);
-
-    for(i=0; i<5;i++)
-    {
-      board[i] = get_row();
-    }
+    board = [get_row(), get_row(), get_row(), get_row(), get_row()];
 
     formatted_board = format_board(board);
 
