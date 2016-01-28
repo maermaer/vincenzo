@@ -30,7 +30,7 @@ module.exports = function(robot) {
           word = words[index];
           spaces = "   ";
           times = 20 - word.length;
-          for(j=0;j<5;j++)
+          for(j=0;j<word.length;j++)
           {
             spaces = spaces.concat(" ");
           }
