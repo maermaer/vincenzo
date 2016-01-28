@@ -32,7 +32,7 @@ module.exports = function(robot) {
           times = 10 - word.length;
           for(j=0;j<times;j++)
           {
-            spaces.concat(" ");
+            //spaces.concat(" ");
           }
           rand_words[i][j] = word.concat(spaces);
         }
