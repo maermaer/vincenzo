@@ -26,15 +26,15 @@ module.exports = function(robot) {
         rand_words[i] = new Array(5);
         for(j=0;j<5;j++)
         {
-          var index = Math.floor(Math.random() * words.length);
-          var word = words[index];
-          //var spaces = "";
-          var times = 10 - word.length;
+          index = Math.floor(Math.random() * words.length);
+          word = words[index];
+          spaces = "";
+          times = 10 - word.length;
           for(j=0;j<times;j++)
           {
             spaces.concat(" ");
           }
-          rand_words[i][j] = word; //.concat(spaces);
+          rand_words[i][j] = word.concat(spaces);
         }
       }
 
