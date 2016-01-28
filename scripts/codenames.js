@@ -66,7 +66,7 @@ module.exports = function(robot) {
     });
 };
 
-canned_requests = [(/(what is the score\s?/i)];
+canned_requests = [/(what is the score\s?/i];
 
 canned_responses = [ "The score is: ",
 "Sure you are, boss.",
