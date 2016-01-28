@@ -30,18 +30,6 @@ var get_row = function(){
     return rand_words;
 }
 
-module.exports = function(robot) {
-  // Basic game setup
-  var red_team = [];
-  var blue_team = [];
-  var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
-
-  // WIP scratch code space
-  robot.respond(/gimme the board\s?/i, function(msg){
-    formatted_board = format_board(the_board);
-    msg.reply(formatted_board);
-  });
-
 var format_board = function(board){
   var tempStr = '```';
   for(i=0; i<5;i++)
@@ -52,7 +40,18 @@ var format_board = function(board){
   return tempStr;
 }
 
-  // Simple static queries.
+module.exports = function(robot) {
+  // Basic game setup
+  var red_team = [];
+  var blue_team = [];
+  var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
+
+  // WIP scratch code space
+  robot.respond(/gimme the board\s?/i, function(msg){
+    formatted_board = format_board(the_board);
+    msg.reply(formatted_board);
+
+     // Simple static queries.
   // Match canned requests with canned responses.
   robot.respond(/(what is)|(what's) the score\s?/i, function(msg){
     msg.reply(canned_responses[0]);
@@ -66,6 +65,7 @@ var format_board = function(board){
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
   }
+  });
 
 canned_requests = [(/i'm the leader/)];
 
