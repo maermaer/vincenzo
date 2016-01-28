@@ -16,24 +16,21 @@ module.exports = function(robot) {
   // Basic game setup
   var red_team = [];
   var blue_team = [];
+  var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
-
-    board = [get_row(), get_row(), get_row(), get_row(), get_row()];
-
-    formatted_board = format_board(board);
-
+    formatted_board = format_board(the_board);
     msg.reply(formatted_board);
   });
 
 var format_board = function(board){
-   var tempStr = '```';
-    for(i=0; i<5;i++)
-    {
-      tempStr += '   ' + board[i].join("| ") + '\n';
-    }
-    tempStr += '```';
+  var tempStr = '```';
+  for(i=0; i<5;i++)
+  {
+    tempStr += '   ' + board[i].join("| ") + '\n';
+  }
+  tempStr += '```';
   return tempStr;
 }
 
@@ -57,7 +54,11 @@ var get_row = function(){
 
   // Simple static queries.
   // Match canned requests with canned responses.
-  robot.respond(/what is the score\s?/i, function(msg){
+  robot.respond(canned_requests[0], function(msg){
+    msg.reply(canned_responses[0]);
+    });
+
+  robot.respond(canned_requests[1], function(msg){
     msg.reply(canned_responses[1]);
     });
 
@@ -66,10 +67,13 @@ var get_row = function(){
     });
   }
 
-canned_requests = ["(what is)|(what's) the score"]
+canned_requests = [(/(what is)|(what's) the score\s?/i),
+(/i'm the leader/)
+]
 
-canned_responses = [ "WELCOME TO CODENAMES! HOLD ON TO YOUR NUTS!",
-"The score is: ",
+canned_responses = [ "The score is: ",
+"Sure you are, boss.",
+"WELCOME TO CODENAMES!",
 "That team is full.",
 "The game is already running.",
 "There isn't a game running.",
