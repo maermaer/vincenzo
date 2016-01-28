@@ -52,15 +52,13 @@ var format_board = function(board){
   return tempStr;
 }
 
-
-
   // Simple static queries.
   // Match canned requests with canned responses.
   robot.respond(/(what is)|(what's) the score\s?/i, function(msg){
     msg.reply(canned_responses[0]);
     });
 
-  robot.respond(/i'm the leader/, function(msg){
+  robot.respond(canned_requests[0], function(msg){
     msg.reply(canned_responses[1]);
     });
 
@@ -69,9 +67,7 @@ var format_board = function(board){
     });
   }
 
-canned_requests = [
-
-]
+canned_requests = [(/i'm the leader/)];
 
 canned_responses = [ "The score is: ",
 "Sure you are, boss.",
@@ -92,7 +88,7 @@ canned_responses = [ "The score is: ",
 "A timer has been started!",
 "Time left: ",
 "Oh no! You've selected the black square!"
-]
+];
 
 words = ["Acne",
 "Acre",
@@ -766,4 +762,4 @@ words = ["Acne",
 "Zero",
 "Zipper",
 "Zone",
-"Zo"]
+"Zo"];
