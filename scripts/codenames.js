@@ -7,7 +7,6 @@
 //7. allow certain game conditions to be met (win/loss/draw)
 //8. allow game reset
 //9. allow scorekeeping
-//(in-round and between rounds)
 //10. allow game end
 //11. setup turn switching
 //12. setup clue giving
@@ -40,11 +39,7 @@ var format_board = function(board){
   return tempStr;
 }
 
-var get_null_row = function(){
-  return [null, null, null, null, null];
-}
-
-var generate_keys = function(key_board){
+var generate_keys = function(){
 
 }
 
@@ -75,7 +70,8 @@ module.exports = function(robot) {
   var blue_team = [];
   var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
   var black_square = null;
-  var key_board = [get_null_row(), get_null_row(), get_null_row(), get_null_row(), get_null_row()];
+  var red_team_answers = generate_keys();
+  var blue_team_answers = generate_keys();
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
@@ -108,8 +104,10 @@ module.exports = function(robot) {
 
 canned_requests = [/what is the score\s?/i,
  /i am the leader\s?/i,
- /start a new game\s?/i,
+ /set us up the bomb\s?/i,
+ /start the game\s?/i,
  /i choose (.*)\s?/i,
+ /(screw them|start a timer)\s?/i
  ];
 
 canned_responses = [ "The score is: ",
@@ -124,11 +122,14 @@ canned_responses = [ "The score is: ",
 " team is up to guess!",
 "A timer has been started!",
 "Time left: ",
-"Oh no! You've selected the black square! What a pleb!"
+"Oh no! You've selected the black square! What a pleb!",
+"AWWW SHIT! TIME'S COUNTIN' DOWN! Time left: ",
+"Time left: "
 ];
 
 canned_errors = ["That team is full.",
 "The game is already running.",
+"You are missing at least one team leader.",
 "There isn't a game running.",
 "The teams are imbalanced."
 ]
