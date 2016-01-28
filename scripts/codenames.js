@@ -44,12 +44,12 @@ var get_row = function(){
     index = Math.floor(Math.random() * words.length);
     word = words[index];
     spaces = "";
-    times = 7 - word.length;
+    times = 10 - word.length;
     for(j=0;j<times;j++)
     {
       spaces += " ";
     }
-    var the_word = spaces + word + spaces;
+    var the_word = word + spaces;
     rand_words[i] = the_word;
   }
     return rand_words;
