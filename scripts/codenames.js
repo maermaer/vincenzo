@@ -53,7 +53,7 @@ module.exports = function(robot) {
   });
      // Simple static queries.
   // Match canned requests with canned responses.
-  robot.respond(/(what is the score\s?/i, function(msg){
+  robot.respond(canned_requests[0], function(msg){
     msg.reply(canned_responses[0]);
     });
 
@@ -65,6 +65,8 @@ module.exports = function(robot) {
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
 };
+
+canned_requests = [/what is the score\s?/i];
 
 canned_responses = [ "The score is: ",
 "Sure you are, boss.",
