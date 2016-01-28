@@ -41,6 +41,7 @@ var format_board = function(board){
 }
 
 module.exports = function(robot) {
+
   // Basic game setup
   var red_team = [];
   var blue_team = [];
@@ -51,15 +52,16 @@ module.exports = function(robot) {
     formatted_board = format_board(the_board);
     msg.reply(formatted_board);
   });
-     // Simple static queries.
-  // Match canned requests with canned responses.
-  robot.respond(canned_requests[0], function(msg){
-    msg.reply(canned_responses[0]);
-    });
 
-  robot.respond(canned_requests[1], function(msg){
-    msg.reply(canned_responses[1]);
+  // Simple static queries.
+  // Match canned requests with canned responses.
+
+  for(i=0; i<1;i++)
+  {
+    robot.respond(canned_requests[i], function(msg){
+      msg.reply(canned_responses[i]);
     });
+  }
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
