@@ -54,11 +54,11 @@ var get_row = function(){
 
   // Simple static queries.
   // Match canned requests with canned responses.
-  robot.respond(canned_requests[0], function(msg){
+  robot.respond(/(what is)|(what's) the score\s?/i, function(msg){
     msg.reply(canned_responses[0]);
     });
 
-  robot.respond(canned_requests[1], function(msg){
+  robot.respond(/i'm the leader/, function(msg){
     msg.reply(canned_responses[1]);
     });
 
@@ -67,8 +67,8 @@ var get_row = function(){
     });
   }
 
-canned_requests = [/(what is)|(what's) the score\s?/i,
-/i'm the leader/
+canned_requests = [
+
 ]
 
 canned_responses = [ "The score is: ",
