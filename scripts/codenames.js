@@ -29,10 +29,10 @@ module.exports = function(robot) {
           index = Math.floor(Math.random() * words.length);
           word = words[index];
           spaces = "   ";
-          //times = 20 - word.length;
+          times = 20 - word.length;
           for(j=0;j<5;j++)
           {
-            //spaces.concat(" ");
+            spaces = spaces.concat(" ");
           }
           rand_words[i][j] = spaces.concat(word)
           msg.reply(rand_words[i][j]);
