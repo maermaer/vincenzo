@@ -40,12 +40,42 @@ var format_board = function(board){
   return tempStr;
 }
 
+var get_null_row = function(){
+  return [null, null, null, null, null];
+}
+
+var generate_keys = function(key_board){
+
+}
+
+var shuffle = function(array) {
+    counter = array.length;
+
+    // While there are elements in the array
+    while (counter > 0) {
+        // Pick a random index
+        index = Math.floor(Math.random() * counter);
+
+        // Decrease counter by 1
+        counter--;
+
+        // And swap the last element with it
+        temp = array[counter];
+        array[counter] = array[index];
+        array[index] = temp;
+    }
+
+    return array;
+}
+
 module.exports = function(robot) {
 
   // Basic game setup
   var red_team = [];
   var blue_team = [];
   var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
+  var black_square = null;
+  var key_board = [get_null_row(), get_null_row(), get_null_row(), get_null_row(), get_null_row()];
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
@@ -56,40 +86,55 @@ module.exports = function(robot) {
   // Simple static queries.
   // Match canned requests with canned responses.
 
-  for(i=0; i<1;i++)
-  {
-    robot.respond(canned_requests[i], function(msg){
-      msg.reply(canned_responses[i]);
+  //for(i=0; i<5;i++)
+  //{
+  //  robot.respond(canned_requests[i], function(msg){
+  //    msg.reply(canned_responses[i]);
+  //  });
+  //}
+
+  robot.respond(canned_requests[0], function(msg){
+    msg.reply(canned_responses[0]);
     });
-  }
+
+  robot.respond(canned_requests[1], function(msg){
+    msg.reply(canned_responses[1]);
+    });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
 };
 
-canned_requests = [/what is the score\s?/i, /i am the leader\s?/i];
+canned_requests = [/what is the score\s?/i,
+ /i am the leader\s?/i,
+ /start a new game\s?/i,
+ /i choose (.*)\s?/i,
+ ];
 
 canned_responses = [ "The score is: ",
 "Sure you are, boss.",
 "WELCOME TO CODENAMES!",
-"That team is full.",
-"The game is already running.",
-"There isn't a game running.",
-"Blue team wins!",
-"Red team wins!",
+" team wins!",
 "I've added you to that team.",
 "Your team consists of: ",
 " is your team captain.",
 "The current score is: ",
-"The teams are imbalanced.",
 "The game has started!",
-"It's blue team's turn.",
-"It's red team's turn.",
+" team is up to guess!",
 "A timer has been started!",
 "Time left: ",
-"Oh no! You've selected the black square!"
+"Oh no! You've selected the black square! What a pleb!"
 ];
+
+canned_errors = ["That team is full.",
+"The game is already running.",
+"There isn't a game running.",
+"The teams are imbalanced."
+]
+
+feedback = ["Good choice! It's one of your team's answers!",
+"Bad choice! It's one of the opposing team's answers!"]
 
 words = ["Acne",
 "Acre",
