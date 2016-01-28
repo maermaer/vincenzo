@@ -44,7 +44,7 @@ var get_row = function(){
     index = Math.floor(Math.random() * words.length);
     word = words[index];
     spaces = "";
-    times = 20 - word.length;
+    times = 15 - word.length;
     for(j=0;j<times;j++)
     {
       spaces += " ";
