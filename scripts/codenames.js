@@ -35,6 +35,7 @@ module.exports = function(robot) {
             //spaces.concat(" ");
           }
           rand_words[i][j] = word.concat(spaces);
+          msg.reply(rand_words[i][j]);
         }
       }
 
@@ -44,7 +45,7 @@ module.exports = function(robot) {
       tempStr += rand_words[i] + '\n';
     }
     tempStr += '```';
-    msg.reply(tempStr);
+    //msg.reply(tempStr);
 
   });
 
