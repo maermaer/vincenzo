@@ -28,13 +28,13 @@ module.exports = function(robot) {
         {
           var index = Math.floor(Math.random() * words.length);
           var word = words[index];
-          var spaces = "";
+          //var spaces = "";
           var times = 10 - word.length;
           for(j=0;j<times;j++)
           {
             spaces.concat(" ");
           }
-          rand_words[i][j] = word.concat(spaces);
+          rand_words[i][j] = word; //.concat(spaces);
         }
       }
 
