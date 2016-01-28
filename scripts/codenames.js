@@ -13,53 +13,56 @@
 //12. setup clue giving
 
 module.exports = function(robot) {
+
+  // Basic game setup
   var red_team = [];
   var blue_team = [];
 
-  robot.respond(/start the game\s?/i, function(msg){
-    msg.reply(canned_responses[0]);
+  // WIP scratch code space
+  robot.respond(/gimme the board\s?/i, function(msg){
+      var rand_words = new Array(5);
+      for(i=0; i<5;i++)
+      {
+        rand_words[i] = new Array(5);
+        for(j=0;j<5;j++)
+        {
+          var index = Math.floor(Math.random() * words.length);
+          var word = words[index];
+          var spaces = "";
+          var times = 10 - word.length;
+          for(j=0;j<times;j++)
+          {
+            spaces.concat(" ");
+          }
+          rand_words[i][j] = word.concat(spaces);
+        }
+      }
+
+    var tempStr = '```';
+    for(i=0; i<5;i++)
+    {
+      tempStr += rand_words[i] + '\n';
+    }
+    tempStr += '```';
+    msg.reply(tempStr);
+
+  });
+
+  // Simple static queries.
+  // Match canned requests with canned responses.
+  robot.respond(/what is the score\s?/i, function(msg){
+    msg.reply(canned_responses[1]);
     });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
-    msg.reply("Welcome to " + msg.match[1] + " te am!");
+    msg.reply("Welcome to " + msg.match[1] + " team!");
     });
+  }
 
-    robot.respond(/gimme the board\s?/i, function(msg){
-        var rand_words = new Array(5);
-        for(i=0; i<5;i++)
-        {
-          rand_words[i] = new Array(5);
-          for(j=0;j<5;j++)
-          {
-            var index = Math.floor(Math.random() * words.length);
-            var word = words[index];
-            var spaces = format_spaces(word);
-            rand_words[i][j] = word.concat(spaces);
-          }
-        }
-
-      var tempStr = '```';
-      for(i=0; i<5;i++)
-      {
-        tempStr += rand_words[i] + '\n';
-      }
-      tempStr += '```';
-      msg.reply(tempStr);
-
-      });
-    }
-
-function format_spaces(word){
-   var space = "";
-   var times = 10 - word.length;
-   for(j=0;j<times;j++)
-   {
-     space.concat(" ");
-   }
-   return space;
- }
+canned_requests = ["(what is)|(what's) the score"]
 
 canned_responses = [ "WELCOME TO CODENAMES! HOLD ON TO YOUR NUTS!",
+"The score is: ",
 "That team is full.",
 "The game is already running.",
 "There isn't a game running.",
