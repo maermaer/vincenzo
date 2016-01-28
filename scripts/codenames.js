@@ -31,7 +31,7 @@ var format_board = function(board){
    var tempStr = '```';
     for(i=0; i<5;i++)
     {
-      tempStr += ' ' + board[i].toString() + '\n';
+      tempStr += board[i].toString() + '\n';
     }
     tempStr += '```';
   return tempStr;
@@ -44,12 +44,12 @@ var get_row = function(){
     index = Math.floor(Math.random() * words.length);
     word = words[index];
     spaces = "";
-    times = 15 - word.length;
+    times = 7 - word.length;
     for(j=0;j<times;j++)
     {
       spaces += " ";
     }
-    var the_word = word + spaces;
+    var the_word = spaces + word + spaces;
     rand_words[i] = the_word;
   }
     return rand_words;
