@@ -31,7 +31,7 @@ var format_board = function(board){
    var tempStr = '```';
     for(i=0; i<5;i++)
     {
-      tempStr += board[i].toString() + '\n';
+      tempStr += ' ' + board[i].toString() + '\n';
     }
     tempStr += '```';
   return tempStr;
