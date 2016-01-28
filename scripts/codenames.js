@@ -31,7 +31,7 @@ var format_board = function(board){
    var tempStr = '```';
     for(i=0; i<5;i++)
     {
-      tempStr += '   ' + board[i].toString() + '\n';
+      tempStr += '   ' + board[i].join("| ") + '\n';
     }
     tempStr += '```';
   return tempStr;
@@ -44,7 +44,7 @@ var get_row = function(){
     index = Math.floor(Math.random() * words.length);
     word = words[index];
     spaces = "";
-    times = 10 - word.length;
+    times = 15 - word.length;
     for(j=0;j<times;j++)
     {
       spaces += " ";
