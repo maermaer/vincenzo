@@ -57,7 +57,7 @@ module.exports = function(robot) {
     msg.reply(canned_responses[0]);
     });
 
-  robot.respond(/i am the leader\s?/i, function(msg){
+  robot.respond(canned_requests[1], function(msg){
     msg.reply(canned_responses[1]);
     });
 
@@ -66,7 +66,7 @@ module.exports = function(robot) {
     });
 };
 
-canned_requests = [/what is the score\s?/i];
+canned_requests = [/what is the score\s?/i, /i am the leader\s?/i];
 
 canned_responses = [ "The score is: ",
 "Sure you are, boss.",
