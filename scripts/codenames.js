@@ -67,8 +67,8 @@ var get_row = function(){
     });
   }
 
-canned_requests = [(/(what is)|(what's) the score\s?/i),
-(/i'm the leader/)
+canned_requests = [/(what is)|(what's) the score\s?/i,
+/i'm the leader/
 ]
 
 canned_responses = [ "The score is: ",
