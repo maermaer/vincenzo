@@ -196,7 +196,7 @@ module.exports = function(robot) {
   var keys = build_keys(red_team_first);
 
   robot.respond(canned_responses[8], function(msg){
-  //  msg.reply(format_board(the_board));
+    msg.reply(format_board(the_board));
   });
 
   robot.respond(canned_requests[0], function(msg){
