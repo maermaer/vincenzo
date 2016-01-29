@@ -209,6 +209,9 @@ module.exports = function(robot) {
   robot.respond(canned_requests[6], function(msg){
     msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
   });
+  robot.respond(canned_requests[7], function(msg){
+    msg.reply(canned_requests.toString());
+  });
 
   robot.respond(canned_requests[4], function(msg){
     var loc = get_word_index(msg.match[1], the_board);
@@ -251,7 +254,7 @@ module.exports = function(robot) {
     }
     else
     {
-      teams.blue.push(msg.message.user.name);
+      teams.red.push(msg.message.user.name);
     }
     msg.reply("Welcome to " + new_team + " team!");
   }); 
@@ -260,10 +263,11 @@ module.exports = function(robot) {
 canned_requests = [/what is the score\s?/i,
  /[Ii] am the leader\s?/i,
  /set us up the bomb\s?/i,
- /start the game\s?/i,
+ /start the (fucking)? game\s?/i,
  /[Ii] choose (.*)\s?/i,
  /(screw them|start a timer)\s?/i,
- /what are the teams\s?/i
+ /what are the teams\s?/i,
+ /help codenames\s?/i
  ];
 
 canned_responses = [ "The score is: ",
@@ -271,7 +275,7 @@ canned_responses = [ "The score is: ",
 "WELCOME TO CODENAMES!",
 " team wins!",
 "I've added you to that team.",
-"Your team consists of: ",
+"Your teams consist of: ",
 " is your team captain.",
 "The current score is: ",
 "The game has started!",
