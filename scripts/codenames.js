@@ -190,7 +190,7 @@ module.exports = function(robot) {
   //}
 
   robot.respond(canned_requests[0], function(msg){
-    msg.reply(msg.user.name);
+    msg.reply(msg.user);
     //msg.reply(canned_responses[0]);
   });
 
