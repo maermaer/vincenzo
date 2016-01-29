@@ -128,20 +128,20 @@ var random_boolean = function(){
   return Math.random()<.5;
 }
 
+var get_team_keylist = function(keylist, the_board){
+  team_list = [];
+  keylist.forEach(function(loc) {
+     team_list.push(the_board[loc.x][loc.y]);
+  }, this);
+  return team_list;
+}
+
 var format_keys = function(the_board, keys){
-  var formatted_blue = [];
-  var formatted_red = [];
+  var formatted_blue = get_team_keylist(keys.blue_keys, the_board).join(", ");
+  var formatted_red = get_team_keylist(keys.red_keys, the_board).join(", ");
 
-  keys.blue_keys.forEach(function(loc) {
-    formatted_blue.push(the_board[loc.x][loc.y]);
-  }, this);
-
-  keys.red_keys.forEach(function(loc) {
-    formatted_red.push(the_board[loc.x][loc.y]);
-  }, this);
-
-  formatted_blue = "Blue team's keys: " + formatted_blue.join(", ");
-  formatted_red = "Red team's keys: " + formatted_red.join(", ");
+  formatted_blue = "Blue team's keys: " + formatted_blue;
+  formatted_red = "Red team's keys: " + formatted_red;
   var formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y];
 
   var team_first = " goes first!";
@@ -205,16 +205,19 @@ module.exports = function(robot) {
     {
       var user_team_keys = null;
       var enemy_team_keys = null;
+      var blue_keys = get_team_keylist(keys.blue_keys, the_board);
+      var red_keys = get_team_keylist(keys.red_keys, the_board);
+      var black_key = the_board[keys.black_key.x][keys.black_key.y];
 
       if(is_on_team(username, teams.blue))
       {
-        user_team_keys = keys.blue_keys;
-        enemy_team_keys = keys.red_keys;
+        user_team_keys = blue_keys;
+        enemy_team_keys = red_keys;
       }
       else
       {
-        user_team_keys = keys.red_keys;
-        enemy_team_keys = keys.blue_keys;
+        user_team_keys = red_keys;
+        enemy_team_keys = blue_keys;
       }
 
       if(loc.x == -1){
@@ -222,6 +225,9 @@ module.exports = function(robot) {
       }
       else
       {
+        msg.reply(user_team_keys.indexOf(word));
+         msg.reply(enemy_team_keys.indexOf(word));
+
         if(user_team_keys.indexOf(word) != -1)
         {
           msg.reply(feedback[0]);
@@ -229,6 +235,10 @@ module.exports = function(robot) {
         else if(enemy_team_keys.indexOf(word) != -1)
         {
           msg.reply(feedback[2]);
+        }
+        else if(word == black_key)
+        {
+          msg.reply(feedback[3]);
         }
         else
         {
@@ -270,7 +280,7 @@ canned_requests = [/what is the score\s?/i,
  /codenames\s?/i,
  /gimme the board\s?/i,
  /gimme the keys\s?/i,
- /add me to the (red|blue) team\s?/i
+ /add me to (the)? (red|blue) (team)?\s?/i
  ];
 
 canned_responses = [ "The score is: ",
@@ -285,7 +295,6 @@ canned_responses = [ "The score is: ",
 " team is up to guess!",
 "A timer has been started!",
 "Time left: ",
-"Oh no! You've selected the black square! What a pleb!",
 "AWWW SHIT! TIME'S COUNTIN' DOWN! Time left: ",
 "Time left: "
 ];
@@ -301,7 +310,8 @@ canned_errors = ["That team is full.",
 
 feedback = ["Good choice! It's one of your team's answers!",
 "Looks like that's a neutral choice.",
-"Bad choice! It's one of the opposing team's answers!"]
+"Bad choice! It's one of the opposing team's answers!",
+"Oh no! You've selected the assassin! What a pleb!"]
 
 words = ["Acne",
 "Acre",
