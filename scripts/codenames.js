@@ -256,13 +256,14 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[10], function(msg){
     var new_team = msg.match[1];
-    if(new_team == "blue")
+    var username = msg.message.user.name;
+    if(new_team == "blue" && !is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
-      teams.blue.push(msg.message.user.name);
+      teams.blue.push(username);
     }
-    else
+    else if(!is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
-      teams.red.push(msg.message.user.name);
+      teams.red.push(username);
     }
     msg.reply("Welcome to " + new_team + " team!");
   });
