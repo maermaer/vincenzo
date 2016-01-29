@@ -216,34 +216,41 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[4], function(msg){
-     msg.reply(canned_errors[5]);
+
     var loc = get_word_index(msg.match[1], the_board);
     var key_loc = {};
     var username = msg.message.user.name;
-    var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
-    var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
+    if(is_ingame(username, teams))
+    {
+      var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
+      var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
 
-    msg.reply(user_team_keylist.toString());
+      msg.reply(user_team_keylist.toString());
 
-    if(loc.x == -1){
-      msg.reply(canned_errors[5]);
+      if(loc.x == -1){
+        msg.reply(canned_errors[5]);
+      }
+      else
+      {
+        key_loc = get_word_index(msg.match[1], user_team_keylist);
+      }
+
+      if(user_team_keylist.indexOf(msg.match[1]) != -1)
+      {
+        msg.reply(feedback[0]);
+      }
+      else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
+      {
+        msg.reply(feedback[2]);
+      }
+      else
+      {
+        msg.reply(feedback[1]);
+      }
     }
     else
     {
-      key_loc = get_word_index(msg.match[1], user_team_keylist);
-    }
-
-    if(user_team_keylist.indexOf(msg.match[1]) != -1)
-    {
-      msg.reply(feedback[0]);
-    }
-    else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
-    {
-      msg.reply(feedback[2]);
-    }
-    else
-    {
-      msg.reply(feedback[1]);
+      msg.reply(canned_errors[6]);
     }
   });
 
@@ -269,11 +276,11 @@ canned_requests = [/what is the score\s?/i,
  /[Ii] am the leader\s?/i,
  /set us up the bomb\s?/i,
  /start the (fucking)? game\s?/i,
- /[Ii] choose (.*)\s?/i,
+ /call (.*)\s?/i,
  /(screw them|start a timer)\s?/i,
  /what are the teams\s?/i,
  /codenames\s?/i,
- /show the board\s?/i,
+ /gimme the board\s?/i,
  /gimme the keys\s?/i,
  /add me to the (red|blue) team\s?/i
  ];
@@ -301,7 +308,7 @@ canned_errors = ["That team is full.",
 "There isn't a game running.",
 "The teams are imbalanced.",
 "That word isn't on the board. Are you just making up words now?",
-"You're not in the game. What are you even doing?"
+"You're not even in this game! Shut that shit up!"
 ]
 
 feedback = ["Good choice! It's one of your team's answers!",
