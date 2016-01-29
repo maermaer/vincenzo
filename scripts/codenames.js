@@ -157,52 +157,65 @@ var format_keys = function(the_board, keys){
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
-var get_user_team_keylist = function(truly, user, keys){
+var get_user_team_keylist = function(truly, username, teams, keys){
+  var keylist = [];
 
+  if(is_ingame(username, teams))
+  {
+    if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
+    {
+      keylist = keys.red_keys;
+    }
+    else
+    {
+      keylist = keys.blue_keys;
+    }
+  }
+  else
+  {
+     msg.reply(canned_errors[6]);
+  }
+  return keylist;
 }
 
-var is_on_team = function(username){
+var is_on_team = function(username, team){
+  team.indexOf(username) != -1;
+}
 
+var is_ingame = function(username, teams){
+  is_on_team(teams.blue) || is_on_team(teams.red)
 }
 
 module.exports = function(robot) {
 
   // Basic game setup
-  var red_team = [];
-  var blue_team = [];
-  var the_board = build_board();
-  var red_team_first = random_boolean();
-  var keys = build_keys(red_team_first);
+  teams = { blue: [], red: [] };
+  the_board = build_board();
+  red_team_first = random_boolean();
+  keys = build_keys(red_team_first);
 
-  // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
     msg.reply(format_board(the_board));
   });
 
-  // Simple static queries.
-  // Match canned requests with canned responses.
-
-  //for(var i=0; i<board_size;i++)
-  //{
-  //  robot.respond(canned_requests[i], function(msg){
-  //    msg.reply(canned_responses[i]);
-  //  });
-  //}
-
   robot.respond(canned_requests[0], function(msg){
-    msg.reply(msg.message.user.name);
-    //msg.reply(canned_responses[0]);
+    msg.reply(canned_responses[0]);
   });
 
   robot.respond(canned_requests[1], function(msg){
     msg.reply(canned_responses[1]);
   });
 
+  robot.respond(canned_requests[6], function(msg){
+    msg.reply(canned_responses[5] + teams);
+  });
+
   robot.respond(canned_requests[4], function(msg){
     var loc = get_word_index(msg.match[1], the_board);
     var key_loc = {};
-    var user_team_keylist = get_user_team_keylist(true, user, keys);
-    var not_user_team_keylist = get_user_team_keylist(false, user, keys);
+    var username = msg.message.user.name;
+    var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
+    var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
 
     if(loc.x != -1){
       msg.reply(canned_errors[5]);
@@ -214,15 +227,15 @@ module.exports = function(robot) {
 
     if(get_word_index(msg.match[1], user_team_keylist).x != -1)
     {
-        msg.reply(feedback[0]);
+      msg.reply(feedback[0]);
     }
-    else if(get_word_index(msg.match[1], not_user_team_keylist) != -1)
+    else if(get_word_index(msg.match[1], not_user_team_keylist).x != -1)
     {
-        msg.reply(feedback[2]);
+      msg.reply(feedback[2]);
     }
     else
     {
-       msg.reply(feedback[1]);
+      msg.reply(feedback[1]);
     }
   });
 
@@ -231,7 +244,16 @@ module.exports = function(robot) {
   });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
-    msg.reply("Welcome to " + msg.match[1] + " team!");
+    var new_team = msg.match[1];
+    if(new_team == "blue")
+    {
+      teams.blue.push(msg.message.user.name);
+    }
+    else
+    {
+      teams.blue.push(msg.message.user.name);
+    }
+    msg.reply("Welcome to " + new_team + " team!");
   }); 
 };
 
@@ -240,7 +262,8 @@ canned_requests = [/what is the score\s?/i,
  /set us up the bomb\s?/i,
  /start the game\s?/i,
  /[Ii] choose (.*)\s?/i,
- /(screw them|start a timer)\s?/i
+ /(screw them|start a timer)\s?/i,
+ /what are the teams\s?/i
  ];
 
 canned_responses = [ "The score is: ",
@@ -265,7 +288,8 @@ canned_errors = ["That team is full.",
 "You are missing at least one team leader.",
 "There isn't a game running.",
 "The teams are imbalanced.",
-"That word isn't on the board. Are you just making up words now?"
+"That word isn't on the board. Are you just making up words now?",
+"You're not in the game. What are you even doing?"
 ]
 
 feedback = ["Good choice! It's one of your team's answers!",
