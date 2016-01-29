@@ -203,31 +203,37 @@ module.exports = function(robot) {
     var username = msg.message.user.name;
     if(is_ingame(username, teams))
     {
-      var user_team_keylist = null;
-      var not_user_team_keylist = null;
+      var user_team_keys = null;
+      var enemy_team_keys = null;
 
-      msg.reply(is_on_team(username, teams.red));
-      msg.reply(is_on_team(username, teams.blue));
+      if(is_on_team(username, teams.blue))
+      {
+        user_team_keys = keys.blue_keys;
+        enemy_team_keys = keys.red_keys;
+      }
+      else
+      {
+        user_team_keys = keys.red_keys;
+        enemy_team_keys = keys.blue_keys;
+      }
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
       }
       else
       {
-        key_loc = get_word_index(word, user_team_keylist);
-      }
-
-      if(user_team_keylist.indexOf(word) != -1)
-      {
-        msg.reply(feedback[0]);
-      }
-      else if(not_user_team_keylist.indexOf(word) != -1)
-      {
-        msg.reply(feedback[2]);
-      }
-      else
-      {
-        msg.reply(feedback[1]);
+        if(user_team_keys.indexOf(word) != -1)
+        {
+          msg.reply(feedback[0]);
+        }
+        else if(enemy_team_keys.indexOf(word) != -1)
+        {
+          msg.reply(feedback[2]);
+        }
+        else
+        {
+          msg.reply(feedback[1]);
+        }
       }
     }
     else
