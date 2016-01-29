@@ -43,7 +43,7 @@ var format_row = function(row){
       spaces += " ";
     }
     spaced_word = word + spaces;
-    spaced_row.push(spaced_word)
+    spaced_row.push(spaced_word);
   }
   return '   ' + spaced_row.join(" ") + '\n';
 }
