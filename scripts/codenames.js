@@ -249,17 +249,19 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[10], function(msg){
-    var new_team = msg.match[1];
-    if(new_team == "blue")
-    {
-      teams.blue.push(msg.message.user.name);
-    }
-    else
-    {
-      teams.red.push(msg.message.user.name);
-    }
-    msg.reply("Welcome to " + new_team + " team!");
+    //var new_team = msg.match[1];
+    //if(new_team == "blue")
+    //{
+    //  teams.blue.push(msg.message.user.name);
+    //}
+    //else
+    //{
+    //  teams.red.push(msg.message.user.name);
+    //}
+    //msg.reply("Welcome to " + new_team + " team!");
   }); 
+
+};
 
 canned_requests = [/what is the score\s?/i,
  /[Ii] am the leader\s?/i,
