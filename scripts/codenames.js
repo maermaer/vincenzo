@@ -189,13 +189,13 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[4], function(msg){
-    var loc = get_word_index(msg.match[1]);
+    var loc = get_word_index(msg.match[1], the_board);
     if(loc.x != -1){
       msg.reply(feedback[0]);
     }
     else
     {
-      msg.reply(feedback[0]);
+      msg.reply(feedback[1]);
     }
   });
 
