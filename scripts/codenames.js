@@ -217,32 +217,31 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[4], function(msg){
 
-    var loc = get_word_index(msg.match[1], the_board);
+    var word = msg.match[1].toLowerCase();
+    msg.reply(word);
+
+    var loc = get_word_index(word, the_board);
     var key_loc = {};
     var username = msg.message.user.name;
     if(is_ingame(username, teams))
     {
-      msg.reply(keys.toString());
-      msg.reply(teams.blue.toString());
-
       var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
+       msg.reply(user_team_keylist);
       var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
-
-
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
       }
       else
       {
-        key_loc = get_word_index(msg.match[1], user_team_keylist);
+        key_loc = get_word_index(word, user_team_keylist);
       }
 
-      if(user_team_keylist.indexOf(msg.match[1]) != -1)
+      if(user_team_keylist.indexOf(word) != -1)
       {
         msg.reply(feedback[0]);
       }
-      else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
+      else if(not_user_team_keylist.indexOf(word) != -1)
       {
         msg.reply(feedback[2]);
       }
