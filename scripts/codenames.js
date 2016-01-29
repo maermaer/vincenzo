@@ -273,6 +273,8 @@ canned_requests = [/what is the score\s?/i,
  /codenames\s?/i,
  ///gimme the board\s?/i,
  /gimme the keys\s?/i,
+ /k/i,
+ /jk/i
 // /add me to the (red|blue) team\s?/i
  ];
 
