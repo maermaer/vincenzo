@@ -230,11 +230,11 @@ module.exports = function(robot) {
       key_loc = get_word_index(msg.match[1], user_team_keylist);
     }
 
-    if(get_word_index(msg.match[1], user_team_keylist).x != -1)
+    if(user_team_keylist.indexOf(msg.match[1]) != -1)
     {
       msg.reply(feedback[0]);
     }
-    else if(get_word_index(msg.match[1], not_user_team_keylist).x != -1)
+    else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
     {
       msg.reply(feedback[2]);
     }
