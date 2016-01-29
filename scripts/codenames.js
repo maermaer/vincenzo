@@ -207,8 +207,8 @@ module.exports = function(robot) {
       var user_team_keylist = null;
       var not_user_team_keylist = null;
 
-      msg.reply(is_on_team(teams.red));
-      msg.reply(is_on_team(teams.blue));
+      msg.reply(teams.red);
+      msg.reply(teams.blue);
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
