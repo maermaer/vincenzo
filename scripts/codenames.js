@@ -265,6 +265,10 @@ module.exports = function(robot) {
     {
       teams.red.push(username);
     }
+    else
+    {
+      msg.reply(canned_errors[7]);
+    }
     msg.reply("Welcome to " + new_team + " team!");
   });
 };
@@ -304,7 +308,8 @@ canned_errors = ["That team is full.",
 "There isn't a game running.",
 "The teams are imbalanced.",
 "That word isn't on the board. Are you just making up words now?",
-"You're not even in this game! Shut that shit up!"
+"You're not even in this game! Shut that shit up!",
+"No bitch, you are already on a team."
 ]
 
 feedback = ["Good choice! It's one of your team's answers!",
