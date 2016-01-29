@@ -39,8 +39,16 @@ var format_board = function(board){
   return tempStr;
 }
 
-var generate_keys = function(){
-
+var generate_key_board = function(){
+  var keys = [];
+  for(i=0;i<5;i++)
+  {
+    for(j=0;j<5;j++)
+    {
+      keys.push({ x:i, y:j });
+    }
+  }
+  return keys;
 }
 
 var shuffle = function(array) {
@@ -63,15 +71,44 @@ var shuffle = function(array) {
     return array;
 }
 
+var generate_keys = function(){
+  key_board = generate_key_board();
+  key_board = shuffle(key_board);
+
+  red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
+  blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
+
+  keys = { red_keys: red_keys, blue_keys: blue_keys, black_key: key_board.pop() };
+  return keys;
+}
+
+var format_keys = function(board, keys){
+  formatted_blue = [];
+  formatted_red = [];
+
+  keys.blue_keys.forEach(function(loc) {
+    formatted_blue.push(the_board[loc.x][loc.y].trim());
+  }, this);
+
+  keys.red_keys.forEach(function(loc) {
+    formatted_red.push(the_board[loc.x][loc.y].trim());
+  }, this);
+
+  formatted_blue = "Blue team's keys: " + formatted_blue.join(", ");
+  formatted_red = "Red team's keys: " + formatted_red.join(", ");
+  formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y].trim();
+
+  return formatted_red + '\n' + formatted_blue + '\n' + formatted_black;
+}
+
+
 module.exports = function(robot) {
 
   // Basic game setup
   var red_team = [];
   var blue_team = [];
   var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
-  var black_square = null;
-  var red_team_answers = generate_keys();
-  var blue_team_answers = generate_keys();
+  var keys = generate_keys();
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
@@ -97,6 +134,10 @@ module.exports = function(robot) {
     msg.reply(canned_responses[1]);
     });
 
+  robot.respond(canned_requests[6], function(msg){
+    msg.reply(format_keys(the_board, keys));
+    });
+
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
     });
@@ -107,7 +148,8 @@ canned_requests = [/what is the score\s?/i,
  /set us up the bomb\s?/i,
  /start the game\s?/i,
  /i choose (.*)\s?/i,
- /(screw them|start a timer)\s?/i
+ /(screw them|start a timer)\s?/i,
+ /gimme the keys\s?/i
  ];
 
 canned_responses = [ "The score is: ",
