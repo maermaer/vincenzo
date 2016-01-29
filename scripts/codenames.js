@@ -190,10 +190,10 @@ var is_ingame = function(username, teams){
 module.exports = function(robot) {
 
   // Basic game setup
-  teams = { blue: [], red: [] };
-  the_board = build_board();
-  red_team_first = random_boolean();
-  keys = build_keys(red_team_first);
+  var teams = { blue: [], red: [] };
+  var the_board = build_board();
+  var red_team_first = random_boolean();
+  var keys = build_keys(red_team_first);
 
   robot.respond(canned_responses[8], function(msg){
     msg.reply(format_board(the_board));
