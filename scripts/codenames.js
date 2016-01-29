@@ -159,24 +159,24 @@ var format_keys = function(the_board, keys){
 }
 
 var get_user_team_keylist = function(truly, username, teams, keys){
-  var keylist = [];
+// var keylist = [];
 
-  if(is_ingame(username, teams))
-  {
-    if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
-    {
-      keylist = keys.red_keys;
-    }
-    else
-    {
-      keylist = keys.blue_keys;
-    }
-  }
-  else
-  {
-     msg.reply(canned_errors[6]);
-  }
-  return keylist;
+// if(is_ingame(username, teams))
+// {
+//   if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
+//   {
+//     keylist = keys.red_keys;
+//   }
+//   else
+//   {
+//     keylist = keys.blue_keys;
+//   }
+// }
+// else
+// {
+//    msg.reply(canned_errors[6]);
+// }
+// return keylist;
 }
 
 var is_on_team = function(username, team){
@@ -208,11 +208,11 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[6], function(msg){
-    msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
+   // msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
   });
 
   robot.respond(canned_requests[7], function(msg){
-    msg.reply(canned_requests.toString());
+//    msg.reply(canned_requests.toString());
   });
 
   robot.respond(canned_requests[4], function(msg){
