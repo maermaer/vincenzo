@@ -256,6 +256,7 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[10], function(msg){
     var new_team = msg.match[1];
+    msg.reply(new_team);
     var username = msg.message.user.name;
     if(new_team == "blue" && !is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
