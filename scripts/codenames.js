@@ -86,19 +86,34 @@ var shuffle = function(array) {
   return array;
 }
 
-var build_keys = function(){
+var build_keys = function(red_team_first){
   var key_board = build_key_board();
   key_board = shuffle(key_board);
 
-  var red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
-  key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
-  var blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
-  key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
+  var red_keys = [];
+  var blue_keys = [];
 
-  keys = { red_keys: red_keys, blue_keys: blue_keys, black_key: key_board.pop() };
+  for(var i=0; i<8; i++){
+    red_keys.push(key_board.pop());
+    blue_keys.push(key_board.pop());
+  }
+
+  if(red_team_first)
+  {
+    red_keys.push(key_board.pop());
+  }
+  else
+  {
+    blue_keys.push(key_board.pop());
+  }
+
+  keys = { red_keys: red_keys, blue_keys: blue_keys, black_key: key_board.pop(), red_team_first: red_team_first };
   return keys;
 }
 
+var random_boolean = function(){
+    return Math.random()<.5; // Readable, succint
+  }
 var format_keys = function(the_board, keys){
   var formatted_blue = [];
   var formatted_red = [];
@@ -113,9 +128,20 @@ var format_keys = function(the_board, keys){
 
   formatted_blue = "Blue team's keys: " + formatted_blue.join(", ");
   formatted_red = "Red team's keys: " + formatted_red.join(", ");
-  formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y];
+  var formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y];
 
-  return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '```';
+  var team_first = " goes first!";
+
+  if(keys.red_team_first)
+  {
+    team_first = "Red" + team_first;
+  }
+  else
+  {
+     team_first = "Blue" + team_first;
+  }
+
+  return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
 module.exports = function(robot) {
@@ -124,7 +150,8 @@ module.exports = function(robot) {
   var red_team = [];
   var blue_team = [];
   var the_board = build_board();
-  var keys = build_keys();
+  var red_team_first = random_boolean();
+  var keys = build_keys(red_team_first);
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
