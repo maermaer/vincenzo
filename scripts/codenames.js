@@ -159,32 +159,32 @@ var format_keys = function(the_board, keys){
 }
 
 var get_user_team_keylist = function(truly, username, teams, keys){
-// var keylist = [];
+  var keylist = [];
 
-// if(is_ingame(username, teams))
-// {
-//   if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
-//   {
-//     keylist = keys.red_keys;
-//   }
-//   else
-//   {
-//     keylist = keys.blue_keys;
-//   }
-// }
-// else
-// {
-//    msg.reply(canned_errors[6]);
-// }
-// return keylist;
+  if(is_ingame(username, teams))
+  {
+    if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
+    {
+      keylist = keys.red_keys;
+    }
+    else
+    {
+      keylist = keys.blue_keys;
+    }
+  }
+  else
+  {
+     msg.reply(canned_errors[6]);
+  }
+  return keylist;
 }
 
 var is_on_team = function(username, team){
- // return team.indexOf(username) != -1;
+  return team.indexOf(username) != -1;
 }
 
 var is_ingame = function(username, teams){
-//  return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
+  return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
 }
 
 module.exports = function(robot) {
@@ -196,7 +196,7 @@ module.exports = function(robot) {
   var keys = build_keys(red_team_first);
 
   robot.respond(canned_responses[8], function(msg){
-    msg.reply(format_board(the_board));
+  //  msg.reply(format_board(the_board));
   });
 
   robot.respond(canned_requests[0], function(msg){
@@ -208,59 +208,58 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[6], function(msg){
-   // msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
+    msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
   });
 
   robot.respond(canned_requests[7], function(msg){
-//    msg.reply(canned_requests.toString());
+    msg.reply(canned_requests.toString());
   });
 
   robot.respond(canned_requests[4], function(msg){
-    //var loc = get_word_index(msg.match[1], the_board);
-    //var key_loc = {};
-    //var username = msg.message.user.name;
-    //var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
-    //var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
-//
-    //if(loc.x != -1){
-    //  msg.reply(canned_errors[5]);
-    //}
-    //else
-    //{
-    //  key_loc = get_word_index(msg.match[1], user_team_keylist);
-    //}
-//
-    //if(user_team_keylist.indexOf(msg.match[1]) != -1)
-    //{
-    //  msg.reply(feedback[0]);
-    //}
-    //else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
-    //{
-    //  msg.reply(feedback[2]);
-    //}
-    //else
-    //{
-    //  msg.reply(feedback[1]);
-    //}
+    var loc = get_word_index(msg.match[1], the_board);
+    var key_loc = {};
+    var username = msg.message.user.name;
+    var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
+    var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
+
+    if(loc.x != -1){
+      msg.reply(canned_errors[5]);
+    }
+    else
+    {
+      key_loc = get_word_index(msg.match[1], user_team_keylist);
+    }
+
+    if(user_team_keylist.indexOf(msg.match[1]) != -1)
+    {
+      msg.reply(feedback[0]);
+    }
+    else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
+    {
+      msg.reply(feedback[2]);
+    }
+    else
+    {
+      msg.reply(feedback[1]);
+    }
   });
 
   robot.respond(canned_requests[9], function(msg){
- //   msg.reply(format_keys(the_board, keys));
+    msg.reply(format_keys(the_board, keys));
   });
 
   robot.respond(canned_requests[10], function(msg){
-    //var new_team = msg.match[1];
-    //if(new_team == "blue")
-    //{
-    //  teams.blue.push(msg.message.user.name);
-    //}
-    //else
-    //{
-    //  teams.red.push(msg.message.user.name);
-    //}
-    //msg.reply("Welcome to " + new_team + " team!");
+    var new_team = msg.match[1];
+    if(new_team == "blue")
+    {
+      teams.blue.push(msg.message.user.name);
+    }
+    else
+    {
+      teams.red.push(msg.message.user.name);
+    }
+    msg.reply("Welcome to " + new_team + " team!");
   }); 
-
 };
 
 canned_requests = [/what is the score\s?/i,
@@ -271,11 +270,9 @@ canned_requests = [/what is the score\s?/i,
  /(screw them|start a timer)\s?/i,
  /what are the teams\s?/i,
  /codenames\s?/i,
- ///gimme the board\s?/i,
+ /gimme the board\s?/i,
  /gimme the keys\s?/i,
- /k/i,
- /jk/i
-// /add me to the (red|blue) team\s?/i
+ /add me to the (red|blue) team\s?/i
  ];
 
 canned_responses = [ "The score is: ",
