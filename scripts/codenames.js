@@ -194,7 +194,7 @@ module.exports = function(robot) {
   red_team_first = random_boolean();
   keys = build_keys(red_team_first);
 
-  robot.respond(/gimme the board\s?/i, function(msg){
+  robot.respond(canned_responses[8], function(msg){
     msg.reply(format_board(the_board));
   });
 
@@ -242,11 +242,11 @@ module.exports = function(robot) {
     }
   });
 
-  robot.respond(/gimme the keys\s?/i, function(msg){
+  robot.respond(canned_requests[9], function(msg){
     msg.reply(format_keys(the_board, keys));
   });
 
-  robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
+  robot.respond(canned_requests[10], function(msg){
     var new_team = msg.match[1];
     if(new_team == "blue")
     {
@@ -267,7 +267,10 @@ canned_requests = [/what is the score\s?/i,
  /[Ii] choose (.*)\s?/i,
  /(screw them|start a timer)\s?/i,
  /what are the teams\s?/i,
- /codenames\s?/i
+ /codenames\s?/i,
+ /gimme the board\s?/i,
+ /gimme the keys\s?/i,
+ /add me to the (red|blue) team\s?/i
  ];
 
 canned_responses = [ "The score is: ",
