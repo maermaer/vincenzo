@@ -209,6 +209,7 @@ module.exports = function(robot) {
   robot.respond(canned_requests[6], function(msg){
     msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
   });
+
   robot.respond(canned_requests[7], function(msg){
     msg.reply(canned_requests.toString());
   });
@@ -246,7 +247,7 @@ module.exports = function(robot) {
     msg.reply(format_keys(the_board, keys));
   });
 
-  robot.respond(canned_requests[10], function(msg){
+  robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     var new_team = msg.match[1];
     if(new_team == "blue")
     {
@@ -269,8 +270,7 @@ canned_requests = [/what is the score\s?/i,
  /what are the teams\s?/i,
  /codenames\s?/i,
  /gimme the board\s?/i,
- /gimme the keys\s?/i,
- /add me to the (red|blue) team\s?/i
+ /gimme the keys\s?/i
  ];
 
 canned_responses = [ "The score is: ",
