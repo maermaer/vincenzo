@@ -225,8 +225,6 @@ module.exports = function(robot) {
       }
       else
       {
-        msg.reply(user_team_keys.indexOf(word));
-         msg.reply(enemy_team_keys.indexOf(word));
 
         if(user_team_keys.indexOf(word) != -1)
         {
