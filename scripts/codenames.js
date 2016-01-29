@@ -17,7 +17,7 @@ var build_row = function(){
   var rand_words = new Array(board_size);
   for(var i=0; i<board_size;i++){
     var index = Math.floor(Math.random() * words.length);
-    var word = words[index];
+    var word = words[index].toLowerCase();
     rand_words[i] = word;
   }
   return rand_words;
@@ -87,6 +87,7 @@ var shuffle = function(array) {
 }
 
 var get_word_index = function(word, the_board){
+  var word = word.toLowerCase();
   var location = { x: -1, y: -1};
   for(var i=0;i<board_size;i++){
     if(the_board[i].indexOf(word) != -1)
@@ -209,10 +210,10 @@ module.exports = function(robot) {
 };
 
 canned_requests = [/what is the score\s?/i,
- /i am the leader\s?/i,
+ /[Ii] am the leader\s?/i,
  /set us up the bomb\s?/i,
  /start the game\s?/i,
- /i choose (.*)\s?/i,
+ /[Ii] choose (.*)\s?/i,
  /(screw them|start a timer)\s?/i
  ];
 
