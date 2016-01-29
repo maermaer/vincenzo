@@ -180,11 +180,11 @@ var get_user_team_keylist = function(truly, username, teams, keys){
 }
 
 var is_on_team = function(username, team){
-  return team.indexOf(username) != -1;
+ // return team.indexOf(username) != -1;
 }
 
 var is_ingame = function(username, teams){
-  return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
+//  return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
 }
 
 module.exports = function(robot) {
@@ -245,7 +245,7 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[9], function(msg){
-    msg.reply(format_keys(the_board, keys));
+ //   msg.reply(format_keys(the_board, keys));
   });
 
   robot.respond(canned_requests[10], function(msg){
