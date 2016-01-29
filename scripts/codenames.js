@@ -207,7 +207,7 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[6], function(msg){
-    msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " teams.red.toString());
+    msg.reply(canned_responses[5] + "Blue: " + teams.blue.toString() + " Red: " + teams.red.toString());
   });
 
   robot.respond(canned_requests[4], function(msg){
