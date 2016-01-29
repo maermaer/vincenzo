@@ -11,40 +11,47 @@
 //11. setup turn switching
 //12. setup clue giving
 
+var board_size = 5;
 var get_row = function(){
-  var rand_words = new Array(5);
-  for(i=0; i<5;i++)
-  {
+  var rand_words = new Array(board_size);
+  for(i=0; i<board_size;i++){
     index = Math.floor(Math.random() * words.length);
     word = words[index];
-    spaces = "";
-    times = 15 - word.length;
-    for(j=0;j<times;j++)
-    {
-      spaces += " ";
-    }
-    var the_word = word + spaces;
-    rand_words[i] = the_word;
+    rand_words[i] = word;
   }
     return rand_words;
 }
 
 var format_board = function(board){
   var tempStr = '```';
-  for(i=0; i<5;i++)
-  {
-    tempStr += '   ' + board[i].join(" ") + '\n';
+  for(i=0; i<board_size;i++){
+    formatted_row = format_row(board[i]);
+    tempStr += formatted_row;
   }
   tempStr += '```';
   return tempStr;
 }
 
+var format_row = function(row){
+  spaced_row = [];
+
+  for(i=0;i<board_size;i++){
+    word = row[i];
+    spaces = "";
+    times = 15 - word.length;
+    for(j=0;j<times;j++){
+      spaces += " ";
+    }
+    spaced_word = word + spaces;
+    spaced_row.push(spaced_word)
+  }
+  return '   ' + spaced_row.join(" ") + '\n';
+}
+
 var generate_key_board = function(){
   var keys = [];
-  for(i=0;i<5;i++)
-  {
-    for(j=0;j<5;j++)
-    {
+  for(i=0;i<board_size;i++){
+    for(j=0;j<board_size;j++){
       keys.push({ x:i, y:j });
     }
   }
@@ -87,20 +94,19 @@ var format_keys = function(the_board, keys){
   formatted_red = [];
 
   keys.blue_keys.forEach(function(loc) {
-    formatted_blue.push(the_board[loc.x][loc.y].trim());
+    formatted_blue.push(the_board[loc.x][loc.y]);
   }, this);
 
   keys.red_keys.forEach(function(loc) {
-    formatted_red.push(the_board[loc.x][loc.y].trim());
+    formatted_red.push(the_board[loc.x][loc.y]);
   }, this);
 
   formatted_blue = "Blue team's keys: " + formatted_blue.join(", ");
   formatted_red = "Red team's keys: " + formatted_red.join(", ");
-  formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y].trim();
+  formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y];
 
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '```';
 }
-
 
 module.exports = function(robot) {
 
@@ -119,7 +125,7 @@ module.exports = function(robot) {
   // Simple static queries.
   // Match canned requests with canned responses.
 
-  //for(i=0; i<5;i++)
+  //for(i=0; i<board_size;i++)
   //{
   //  robot.respond(canned_requests[i], function(msg){
   //    msg.reply(canned_responses[i]);
