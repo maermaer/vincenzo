@@ -157,6 +157,10 @@ var format_keys = function(the_board, keys){
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
+var get_user_team_keylist(truly, user, keys){
+
+}
+
 module.exports = function(robot) {
 
   // Basic game setup
@@ -182,7 +186,8 @@ module.exports = function(robot) {
   //}
 
   robot.respond(canned_requests[0], function(msg){
-    msg.reply(canned_responses[0]);
+    msg.reply(msg.user.name);
+    //msg.reply(canned_responses[0]);
   });
 
   robot.respond(canned_requests[1], function(msg){
@@ -191,12 +196,29 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[4], function(msg){
     var loc = get_word_index(msg.match[1], the_board);
+    var key_loc = {};
+    var user_team_keylist = get_user_team_keylist(true, user, keys);
+    var not_user_team_keylist = get_user_team_keylist(false, user, keys);
+
     if(loc.x != -1){
-      msg.reply(feedback[0]);
+      msg.reply(canned_errors[5]);
     }
     else
     {
-      msg.reply(feedback[1]);
+      key_loc = get_word_index(msg.match[1], user_team_keylist);
+    }
+
+    if(get_word_index(msg.match[1], user_team_keylist).x != -1)
+    {
+        msg.reply(feedback[0]);
+    }
+    else if(get_word_index(msg.match[1], not_user_team_keylist) != -1)
+    {
+        msg.reply(feedback[2]);
+    }
+    else
+    {
+       msg.reply(feedback[1]);
     }
   });
 
@@ -206,7 +228,7 @@ module.exports = function(robot) {
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
-  });
+  }); 
 };
 
 canned_requests = [/what is the score\s?/i,
@@ -238,10 +260,12 @@ canned_errors = ["That team is full.",
 "The game is already running.",
 "You are missing at least one team leader.",
 "There isn't a game running.",
-"The teams are imbalanced."
+"The teams are imbalanced.",
+"That word isn't on the board. Are you just making up words now?"
 ]
 
 feedback = ["Good choice! It's one of your team's answers!",
+"Looks like that's a neutral choice.",
 "Bad choice! It's one of the opposing team's answers!"]
 
 words = ["Acne",
