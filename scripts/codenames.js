@@ -256,7 +256,6 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[10], function(msg){
     var new_team = msg.match[1];
-    msg.reply(new_team);
     var username = msg.message.user.name;
     if(new_team == "blue" && !is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
@@ -280,7 +279,7 @@ canned_requests = [/what is the score\s?/i,
  /codenames\s?/i,
  /gimme the board\s?/i,
  /gimme the keys\s?/i,
- /add me to (the)? (red|blue) (team)?\s?/i
+ /add me to (red|blue) (team)*\s?/i
  ];
 
 canned_responses = [ "The score is: ",
