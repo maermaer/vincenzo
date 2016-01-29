@@ -82,8 +82,10 @@ var generate_keys = function(){
   key_board = generate_key_board();
   key_board = shuffle(key_board);
 
-  red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
-  blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
+  red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
+  key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
+  blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
+  key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
 
   keys = { red_keys: red_keys, blue_keys: blue_keys, black_key: key_board.pop() };
   return keys;
