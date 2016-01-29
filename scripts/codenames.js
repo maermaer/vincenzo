@@ -86,6 +86,18 @@ var shuffle = function(array) {
   return array;
 }
 
+var get_word_index = function(word, the_board){
+  var location = { x: -1, y: -1};
+  for(var i=0;i<board_size;i++){
+    if(the_board[i].indexOf(word) != -1)
+    {
+      location.x = i;
+      location.y = the_board[i].indexOf(word);
+    }
+  }
+  return location;
+}
+
 var build_keys = function(red_team_first){
   var key_board = build_key_board();
   key_board = shuffle(key_board);
@@ -170,24 +182,30 @@ module.exports = function(robot) {
 
   robot.respond(canned_requests[0], function(msg){
     msg.reply(canned_responses[0]);
-    });
+  });
 
   robot.respond(canned_requests[1], function(msg){
     msg.reply(canned_responses[1]);
-    });
+  });
 
   robot.respond(canned_requests[4], function(msg){
-    msg.reply(msg.match[1]);
-    msg.reply(feedback[0]);
-    });
+    var loc = get_word_index(msg.match[1]);
+    if(loc.x != -1){
+      msg.reply(feedback[0]);
+    }
+    else
+    {
+      msg.reply(feedback[0]);
+    }
+  });
 
   robot.respond(/gimme the keys\s?/i, function(msg){
     msg.reply(format_keys(the_board, keys));
-    });
+  });
 
   robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
     msg.reply("Welcome to " + msg.match[1] + " team!");
-    });
+  });
 };
 
 canned_requests = [/what is the score\s?/i,
