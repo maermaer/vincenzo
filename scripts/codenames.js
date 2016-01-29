@@ -222,10 +222,13 @@ module.exports = function(robot) {
     var username = msg.message.user.name;
     if(is_ingame(username, teams))
     {
+      msg.reply(keys.toString());
+      msg.reply(teams.blue.toString());
+
       var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
       var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
 
-      msg.reply(user_team_keylist.toString());
+
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
