@@ -216,32 +216,32 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[4], function(msg){
-    var loc = get_word_index(msg.match[1], the_board);
-    var key_loc = {};
-    var username = msg.message.user.name;
-    var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
-    var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
-
-    if(loc.x != -1){
-      msg.reply(canned_errors[5]);
-    }
-    else
-    {
-      key_loc = get_word_index(msg.match[1], user_team_keylist);
-    }
-
-    if(user_team_keylist.indexOf(msg.match[1]) != -1)
-    {
-      msg.reply(feedback[0]);
-    }
-    else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
-    {
-      msg.reply(feedback[2]);
-    }
-    else
-    {
-      msg.reply(feedback[1]);
-    }
+    //var loc = get_word_index(msg.match[1], the_board);
+    //var key_loc = {};
+    //var username = msg.message.user.name;
+    //var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
+    //var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
+//
+    //if(loc.x != -1){
+    //  msg.reply(canned_errors[5]);
+    //}
+    //else
+    //{
+    //  key_loc = get_word_index(msg.match[1], user_team_keylist);
+    //}
+//
+    //if(user_team_keylist.indexOf(msg.match[1]) != -1)
+    //{
+    //  msg.reply(feedback[0]);
+    //}
+    //else if(not_user_team_keylist.indexOf(msg.match[1]) != -1)
+    //{
+    //  msg.reply(feedback[2]);
+    //}
+    //else
+    //{
+    //  msg.reply(feedback[1]);
+    //}
   });
 
   robot.respond(canned_requests[9], function(msg){
