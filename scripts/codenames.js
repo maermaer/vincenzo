@@ -179,11 +179,11 @@ var get_user_team_keylist = function(truly, username, teams, keys){
 }
 
 var is_on_team = function(username, team){
-  team.indexOf(username) != -1;
+  return team.indexOf(username) != -1;
 }
 
 var is_ingame = function(username, teams){
-  is_on_team(teams.blue) || is_on_team(teams.red)
+  return is_on_team(teams.blue) || is_on_team(teams.red);
 }
 
 module.exports = function(robot) {
@@ -247,7 +247,7 @@ module.exports = function(robot) {
     msg.reply(format_keys(the_board, keys));
   });
 
-  robot.respond(/add me to the (red|blue) team\s?/i, function(msg){
+  robot.respond(canned_requests[10], function(msg){
     var new_team = msg.match[1];
     if(new_team == "blue")
     {
@@ -270,7 +270,8 @@ canned_requests = [/what is the score\s?/i,
  /what are the teams\s?/i,
  /codenames\s?/i,
  /gimme the board\s?/i,
- /gimme the keys\s?/i
+ /gimme the keys\s?/i,
+ /add me to the (red|blue) team\s?/i
  ];
 
 canned_responses = [ "The score is: ",
