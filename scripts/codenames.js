@@ -260,7 +260,6 @@ module.exports = function(robot) {
     }
     msg.reply("Welcome to " + new_team + " team!");
   }); 
-};
 
 canned_requests = [/what is the score\s?/i,
  /[Ii] am the leader\s?/i,
