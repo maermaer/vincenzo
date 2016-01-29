@@ -125,8 +125,9 @@ var build_keys = function(red_team_first){
 }
 
 var random_boolean = function(){
-    return Math.random()<.5; // Readable, succint
-  }
+  return Math.random()<.5;
+}
+
 var format_keys = function(the_board, keys){
   var formatted_blue = [];
   var formatted_red = [];
@@ -183,7 +184,7 @@ var is_on_team = function(username, team){
 }
 
 var is_ingame = function(username, teams){
-  return is_on_team(teams.blue) || is_on_team(teams.red);
+  return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
 }
 
 module.exports = function(robot) {
