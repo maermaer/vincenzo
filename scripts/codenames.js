@@ -163,7 +163,7 @@ var get_user_team_keylist = function(truly, username, teams, keys){
 
   if(is_ingame(username, teams))
   {
-    if( is_on_team(teams.red) && truly || is_on_team(teams.blue) && !truly)
+    if( is_on_team(teams.red) && (truly == true) || is_on_team(teams.blue) && (truly == false))
     {
       keylist = keys.red_keys;
     }
@@ -216,6 +216,7 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[4], function(msg){
+     msg.reply(canned_errors[5]);
     var loc = get_word_index(msg.match[1], the_board);
     var key_loc = {};
     var username = msg.message.user.name;
@@ -224,7 +225,7 @@ module.exports = function(robot) {
 
     msg.reply(user_team_keylist.toString());
 
-    if(loc.x != -1){
+    if(loc.x == -1){
       msg.reply(canned_errors[5]);
     }
     else
@@ -261,7 +262,7 @@ module.exports = function(robot) {
       teams.red.push(msg.message.user.name);
     }
     msg.reply("Welcome to " + new_team + " team!");
-  }); 
+  });
 };
 
 canned_requests = [/what is the score\s?/i,
