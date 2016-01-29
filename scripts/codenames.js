@@ -158,26 +158,6 @@ var format_keys = function(the_board, keys){
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
-var get_user_team_keylist = function(truly, username, teams, keys){
-  var keylist = [];
-
-  if(is_ingame(username, teams))
-  {
-    if( is_on_team(teams.red) && (truly == true) || is_on_team(teams.blue) && (truly == false))
-    {
-      keylist = keys.red_keys;
-    }
-    else
-    {
-      keylist = keys.blue_keys;
-    }
-  }
-  else
-  {
-     msg.reply(canned_errors[6]);
-  }
-  return keylist;
-}
 
 var is_on_team = function(username, team){
   return team.indexOf(username) != -1;
@@ -218,16 +198,17 @@ module.exports = function(robot) {
   robot.respond(canned_requests[4], function(msg){
 
     var word = msg.match[1].toLowerCase();
-    msg.reply(word);
 
     var loc = get_word_index(word, the_board);
     var key_loc = {};
     var username = msg.message.user.name;
     if(is_ingame(username, teams))
     {
-      var user_team_keylist = get_user_team_keylist(true, username, teams, keys);
-       msg.reply(user_team_keylist);
-      var not_user_team_keylist = get_user_team_keylist(false, username, teams, keys);
+      var user_team_keylist = null;
+      var not_user_team_keylist = null;
+
+      msg.reply(is_on_team(teams.red));
+      msg.reply(is_on_team(teams.blue));
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
