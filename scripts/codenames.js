@@ -82,7 +82,7 @@ var generate_keys = function(){
   return keys;
 }
 
-var format_keys = function(board, keys){
+var format_keys = function(the_board, keys){
   formatted_blue = [];
   formatted_red = [];
 
@@ -134,7 +134,7 @@ module.exports = function(robot) {
     msg.reply(canned_responses[1]);
     });
 
-  robot.respond(canned_requests[6], function(msg){
+  robot.respond(/gimme the keys\s?/i, function(msg){
     msg.reply(format_keys(the_board, keys));
     });
 
@@ -148,8 +148,7 @@ canned_requests = [/what is the score\s?/i,
  /set us up the bomb\s?/i,
  /start the game\s?/i,
  /i choose (.*)\s?/i,
- /(screw them|start a timer)\s?/i,
- /gimme the keys\s?/i
+ /(screw them|start a timer)\s?/i
  ];
 
 canned_responses = [ "The score is: ",
