@@ -161,12 +161,21 @@ module.exports = function(robot) {
   // Simple static queries.
   // Match canned requests with canned responses.
 
-  for(var i=0; i<canned_requests.length;i++)
+  for(var i=0; i<board_size;i++)
   {
-    robot.respond(canned_requests[i], function(msg){
-      msg.reply(canned_responses[i]);
+    var index = i;
+    robot.respond(canned_requests[index], function(msg){
+      msg.reply(canned_responses[index]);
     });
   }
+
+  //robot.respond(canned_requests[0], function(msg){
+  //  msg.reply(canned_responses[0]);
+  //  });
+//
+  //robot.respond(canned_requests[1], function(msg){
+  //  msg.reply(canned_responses[1]);
+  //  });
 
   robot.respond(/gimme the keys\s?/i, function(msg){
     msg.reply(format_keys(the_board, keys));
