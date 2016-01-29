@@ -260,16 +260,17 @@ module.exports = function(robot) {
     if(new_team == "blue" && !is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
       teams.blue.push(username);
+      msg.reply("Welcome to " + new_team + " team!");
     }
     else if(!is_on_team(username, teams.red) && !is_on_team(username, teams.blue))
     {
       teams.red.push(username);
+      msg.reply("Welcome to " + new_team + " team!");
     }
     else
     {
       msg.reply(canned_errors[7]);
     }
-    msg.reply("Welcome to " + new_team + " team!");
   });
 };
 
