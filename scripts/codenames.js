@@ -157,7 +157,11 @@ var format_keys = function(the_board, keys){
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
-var get_user_team_keylist(truly, user, keys){
+var get_user_team_keylist = function(truly, user, keys){
+
+}
+
+var is_on_team = function(username){
 
 }
 
