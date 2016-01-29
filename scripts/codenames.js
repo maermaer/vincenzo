@@ -1,15 +1,18 @@
 //1. setup game loop
-//2. allow creation of teams with team leads
+//2. allow creation of teams with team leads -- p.done
+  // allow team leaders, setup whispering to team leaders
 //3. setup timers
-//4. setup key map
+//4. setup key map --done
 //5. setup board --done
-//6. allow people to choose answers
+//6. allow people to choose answers --p. done
+  // update the board with chosen answers
 //7. allow certain game conditions to be met (win/loss/draw)
 //8. allow game reset
 //9. allow scorekeeping
 //10. allow game end
 //11. setup turn switching
 //12. setup clue giving
+//13. allow game start to lockin teams and leads
 
 board_size = 5;
 
@@ -313,9 +316,9 @@ canned_errors = ["That team is full.",
 "No bitch, you are already on a team."
 ]
 
-feedback = ["Good choice! It's one of your team's answers!",
-"Looks like that's a neutral choice.",
-"Bad choice! It's one of the opposing team's answers!",
+feedback = ["Good choice! It's one of your team's agents!",
+"Looks like you called a civilian.",
+"Bad choice! It's one of the opposing team's agents!",
 "Oh no! You've selected the assassin! What a pleb!"]
 
 words = ["Acne",
