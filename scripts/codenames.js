@@ -98,7 +98,7 @@ var format_keys = function(the_board, keys){
   formatted_red = "Red team's keys: " + formatted_red.join(", ");
   formatted_black = "The black key is: " + the_board[keys.black_key.x][keys.black_key.y].trim();
 
-  return formatted_red + '\n' + formatted_blue + '\n' + formatted_black;
+  return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '```';
 }
 
 
