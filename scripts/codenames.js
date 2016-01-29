@@ -163,7 +163,7 @@ module.exports = function(robot) {
 
   for(var i=0; i<board_size;i++)
   {
-    var index = i;
+    var index = i + 0;
     robot.respond(canned_requests[index], function(msg){
       msg.reply(canned_responses[index]);
     });
