@@ -158,7 +158,6 @@ var format_keys = function(the_board, keys){
   return '```\n' + formatted_red + '\n' + formatted_blue + '\n' + formatted_black + '\n' + team_first + '```';
 }
 
-
 var is_on_team = function(username, team){
   return team.indexOf(username) != -1;
 }
@@ -207,8 +206,8 @@ module.exports = function(robot) {
       var user_team_keylist = null;
       var not_user_team_keylist = null;
 
-      msg.reply(teams.red);
-      msg.reply(teams.blue);
+      msg.reply(is_on_team(username, teams.red));
+      msg.reply(is_on_team(username, teams.blue));
 
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
