@@ -267,7 +267,7 @@ canned_requests = [/what is the score\s?/i,
  /[Ii] choose (.*)\s?/i,
  /(screw them|start a timer)\s?/i,
  /what are the teams\s?/i,
- /help codenames\s?/i
+ /codenames\s?/i
  ];
 
 canned_responses = [ "The score is: ",
