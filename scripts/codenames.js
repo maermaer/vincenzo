@@ -11,46 +11,54 @@
 //11. setup turn switching
 //12. setup clue giving
 
-var board_size = 5;
-var get_row = function(){
+board_size = 5;
+
+var build_row = function(){
   var rand_words = new Array(board_size);
-  for(i=0; i<board_size;i++){
-    index = Math.floor(Math.random() * words.length);
-    word = words[index];
+  for(var i=0; i<board_size;i++){
+    var index = Math.floor(Math.random() * words.length);
+    var word = words[index];
     rand_words[i] = word;
   }
-    return rand_words;
+  return rand_words;
+}
+
+var build_board = function(){
+  var board = new Array(5);
+  for(var i=0; i<board_size; i++){
+    board[i] = build_row();
+  }
+  return board;
 }
 
 var format_board = function(board){
   var tempStr = '```';
-  for(i=0; i<board_size;i++){
-    formatted_row = format_row(board[i]);
-    tempStr += formatted_row;
-  }
+  for(var i=0; i<board_size;i++){
+    tempStr += format_row(board[i]);
+  };
   tempStr += '```';
   return tempStr;
 }
 
 var format_row = function(row){
-  spaced_row = [];
+  var spaced_row = [];
 
-  for(i=0;i<board_size;i++){
-    word = row[i];
-    spaces = "";
-    times = 15 - word.length;
+  for(var i=0;i<board_size;i++){
+    var word = row[i];
+    var spaces = "";
+    var times = 15 - word.length;
     for(j=0;j<times;j++){
       spaces += " ";
     }
-    spaced_word = word + spaces;
+    var spaced_word = word + spaces;
     spaced_row.push(spaced_word);
   }
   return '   ' + spaced_row.join(" ") + '\n';
 }
 
-var generate_key_board = function(){
+var build_key_board = function(){
   var keys = [];
-  for(i=0;i<board_size;i++){
+  for(var i=0;i<board_size;i++){
     for(j=0;j<board_size;j++){
       keys.push({ x:i, y:j });
     }
@@ -59,32 +67,32 @@ var generate_key_board = function(){
 }
 
 var shuffle = function(array) {
-    counter = array.length;
+    var counter = array.length;
 
     // While there are elements in the array
     while (counter > 0) {
         // Pick a random index
-        index = Math.floor(Math.random() * counter);
+        var index = Math.floor(Math.random() * counter);
 
         // Decrease counter by 1
         counter--;
 
         // And swap the last element with it
-        temp = array[counter];
+        var temp = array[counter];
         array[counter] = array[index];
         array[index] = temp;
     }
 
-    return array;
+  return array;
 }
 
-var generate_keys = function(){
-  key_board = generate_key_board();
+var build_keys = function(){
+  var key_board = build_key_board();
   key_board = shuffle(key_board);
 
-  red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
+  var red_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
   key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
-  blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
+  var blue_keys = [key_board.pop(), key_board.pop(),key_board.pop(),
   key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop(),key_board.pop()];
 
   keys = { red_keys: red_keys, blue_keys: blue_keys, black_key: key_board.pop() };
@@ -92,8 +100,8 @@ var generate_keys = function(){
 }
 
 var format_keys = function(the_board, keys){
-  formatted_blue = [];
-  formatted_red = [];
+  var formatted_blue = [];
+  var formatted_red = [];
 
   keys.blue_keys.forEach(function(loc) {
     formatted_blue.push(the_board[loc.x][loc.y]);
@@ -115,19 +123,18 @@ module.exports = function(robot) {
   // Basic game setup
   var red_team = [];
   var blue_team = [];
-  var the_board = [get_row(), get_row(), get_row(), get_row(), get_row()];
-  var keys = generate_keys();
+  var the_board = build_board();
+  var keys = build_keys();
 
   // WIP scratch code space
   robot.respond(/gimme the board\s?/i, function(msg){
-    formatted_board = format_board(the_board);
-    msg.reply(formatted_board);
+    msg.reply(format_board(the_board));
   });
 
   // Simple static queries.
   // Match canned requests with canned responses.
 
-  //for(i=0; i<board_size;i++)
+  //for(var i=0; i<board_size;i++)
   //{
   //  robot.respond(canned_requests[i], function(msg){
   //    msg.reply(canned_responses[i]);
