@@ -194,7 +194,7 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[7], function(msg){
-    msg.reply(canned_requests.toString().replace(/\/i/g, "").replace(/\//g, "").replace(/\\/g, "").replace(/\?/g, ""));
+    msg.reply(canned_requests.toString().replace(/\/i/g, "").replace(/\//g, "").replace(/\\s/g, "").replace(/\\/g, "").replace(/\?/g, ""));
   });
 
   robot.respond(canned_requests[4], function(msg){
