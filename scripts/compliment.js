@@ -1,8 +1,8 @@
-
-robot.respond(requests[0], function(msg){
+module.exports = function(robot) {
+  robot.respond(requests[0], function(msg){
     msg.reply(encouragement[Math.floor(Math.random() * encouragement.length)]);
   });
-
+};
 requests = [/encourage me\s?/i]
 
 encouragement =[
@@ -56,4 +56,3 @@ encouragement =[
 "All progress takes place outside the comfort zone. ~Michael John Bobak",
 "When I dare to be powerful – to use my strength in the service of my vision, then it becomes less and less important whether I am afraid. ~Audre Lorde",
 "A man can be as great as he wants to be. If you believe in yourself and have the courage, the determination, the dedication, the competitive drive and if you are willing to sacrifice the little things in life and pay the price for the things that are worthwhile, it can be done. ~Vince Lombardi"]
-
