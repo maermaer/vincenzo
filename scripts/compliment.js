@@ -2,8 +2,13 @@ module.exports = function(robot) {
   robot.respond(requests[0], function(msg){
     msg.reply(encouragement[Math.floor(Math.random() * encouragement.length)]);
   });
+    robot.respond(requests[1], function(msg){
+    msg.reply("Thanks, " + msg.message.user.name.toString());
+  });
 };
-requests = [/encourage me\s?/i]
+requests = [/encourage me\s?/i,
+/good job\s?/i,
+]
 
 encouragement =[
 "The only person you are destined to become is the person you decide to be. ~Ralph Waldo Emerson",
