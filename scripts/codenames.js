@@ -169,16 +169,25 @@ var is_ingame = function(username, teams){
   return is_on_team(username, teams.blue) || is_on_team(username, teams.red);
 }
 
+var mark_board = function(the_board,loc, color){
+  the_board[loc.x][loc.y] = color;
+}
+
 module.exports = function(robot) {
 
   // Basic game setup
   var teams = { blue: [], red: [] };
   var the_board = build_board();
+  var marked_board = the_board;
   var red_team_first = random_boolean();
   var keys = build_keys(red_team_first);
 
   robot.respond(canned_requests[8], function(msg){
     msg.reply(format_board(the_board));
+  });
+
+  robot.respond(canned_requests[9], function(msg){
+    msg.reply(format_board(marked_board));
   });
 
   robot.respond(canned_requests[0], function(msg){
@@ -199,6 +208,7 @@ module.exports = function(robot) {
       );
   });
 
+  // Choosing a word
   robot.respond(canned_requests[4], function(msg){
 
     var word = msg.match[1].toLowerCase();
@@ -213,35 +223,46 @@ module.exports = function(robot) {
       var blue_keys = get_team_keylist(keys.blue_keys, the_board);
       var red_keys = get_team_keylist(keys.red_keys, the_board);
       var black_key = the_board[keys.black_key.x][keys.black_key.y];
+      var user_team = null;
+      var enemy_team = null;
 
+      // Assign the solution to the correct team
       if(is_on_team(username, teams.blue))
       {
         user_team_keys = blue_keys;
         enemy_team_keys = red_keys;
+        user_team = "Blue";
+        enemy_team = "Red";
       }
       else
       {
         user_team_keys = red_keys;
         enemy_team_keys = blue_keys;
+        user_team_color = "Red";
+        enemy_team_color = "Blue";
       }
 
+      // If it's not a word
       if(loc.x == -1){
         msg.reply(canned_errors[5]);
       }
       else
       {
-
+        // Respond differently based on result of check
         if(user_team_keys.indexOf(word) != -1)
         {
           msg.reply(feedback[0]);
+          mark_board(the_board, loc, user_team_color);
         }
         else if(enemy_team_keys.indexOf(word) != -1)
         {
           msg.reply(feedback[2]);
+          mark_board(the_board, loc, enemy_team_color);
         }
         else if(word == black_key)
         {
           msg.reply(feedback[3]);
+          mark_board(the_board, loc, "Black");
         }
         else
         {
@@ -279,6 +300,7 @@ module.exports = function(robot) {
   });
 };
 
+
 canned_requests = [/what is the score\s?/i,
  /[Ii] am the leader\s?/i,
  /set us up the bomb\s?/i,
@@ -287,6 +309,7 @@ canned_requests = [/what is the score\s?/i,
  /(screw them|start a timer)\s?/i,
  /what are the teams\s?/i,
  /codenames\s?/i,
+ /gimme the original board\s?/i,
  /gimme the board\s?/i,
  /gimme the keys\s?/i,
  /add me to (red|blue) (team)*\s?/i
