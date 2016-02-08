@@ -1,11 +1,12 @@
 //1. setup game loop
 //2. allow creation of teams with team leads -- p.done
-  // allow team leaders, setup whispering to team leaders
+  // allow team leaders --done
+  // setup whispering to team leaders 
 //3. setup timers
 //4. setup key map --done
 //5. setup board --done
 //6. allow people to choose answers --p. done
-  // update the board with chosen answers
+  // update the board with chosen answers -- done
 //7. allow certain game conditions to be met (win/loss/draw)
 //8. allow game reset
 //9. allow scorekeeping
@@ -173,10 +174,27 @@ var mark_board = function(the_board,loc, color){
   the_board[loc.x][loc.y] = color;
 }
 
+var make_leader = function(user){
+  var success = false;
+  if(teams.blue.indexOf(user.username) != -1){
+    teams.blue_captian = user;
+  }
+  else if(teams.red.indexOf(user.username) != -1)
+  {
+     teams.red_captain = user;
+  }
+  else
+  {
+    success = false;
+  }
+
+  return success;
+}
+
 module.exports = function(robot) {
 
   // Basic game setup
-  var teams = { blue: [], red: [] };
+  var teams = { blue: [], red: [], red_captain: null, blue_captian: null };
   var the_board = build_board();
   var marked_board = the_board;
   var red_team_first = random_boolean();
@@ -195,7 +213,14 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[1], function(msg){
-    msg.reply(canned_responses[1]);
+    if(make_leader(msg.message.user))
+    {
+      msg.reply(canned_responses[1]);
+    }
+    else
+    {
+      msg.reply(canned_errors[6]);
+    }
   });
 
   robot.respond(canned_requests[6], function(msg){
@@ -277,7 +302,15 @@ module.exports = function(robot) {
   });
 
   robot.respond(canned_requests[9], function(msg){
-    msg.reply(format_keys(the_board, keys));
+    user = msg.message.user;
+    if(user == teams.red_captain || user == teams.blue_captian)
+    {
+      msg.reply(format_keys(the_board, keys)); // @TODO change this to whisper
+    }
+    else
+    {
+      msg.reply(canned_errors[8]);
+    }
   });
 
   robot.respond(canned_requests[10], function(msg){
@@ -338,7 +371,8 @@ canned_errors = ["That team is full.",
 "The teams are imbalanced.",
 "That word isn't on the board. Are you just making up words now?",
 "You're not even in this game! Shut that shit up!",
-"No bitch, you are already on a team."
+"No bitch, you are already on a team.",
+"You wanna be the captain? Well, you ain't!"
 ]
 
 feedback = ["Good choice! It's one of your team's agents!",
