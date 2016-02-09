@@ -1,19 +1,29 @@
 //1. setup game loop
+  // need every fxn to check if game running
+  // need funcitons that have possible game-ending states -- needs global vs. local logical check
+    // to be able to change it
 //2. allow creation of teams with team leads -- p.done
   // allow team leaders --done
-  // setup whispering to team leaders 
-//3. setup timers
+  // setup whispering to team leaders -- needs whisper fxn
+//3. setup timers -- we sure we want this?
 //4. setup key map --done
 //5. setup board --done
 //6. allow people to choose answers --p. done
   // update the board with chosen answers -- done
 //7. allow certain game conditions to be met (win/loss/draw)
-//8. allow game reset
+//8. allow game reset -- done
 //9. allow scorekeeping
 //10. allow game end
-//11. setup turn switching
+//11. setup turn switching -- enforced or simply chosen?
 //12. setup clue giving
 //13. allow game start to lockin teams and leads
+
+// Game states:
+// a) No game running
+// b) Setting up teams, no game started
+// c) Game started
+// d) Game finished
+
 
 board_size = 5;
 
@@ -191,14 +201,24 @@ var make_leader = function(user){
   return success;
 }
 
+
 module.exports = function(robot) {
 
-  // Basic game setup
-  var teams = { blue: [], red: [], red_captain: null, blue_captian: null };
-  var the_board = build_board();
-  var marked_board = the_board;
-  var red_team_first = random_boolean();
-  var keys = build_keys(red_team_first);
+  robot.respond(canned_requests[2], function(msg){
+    // Basic game setup
+    var teams = { blue: [], red: [], red_captain: null, blue_captian: null };
+    var the_board = build_board();
+    var marked_board = the_board;
+    var red_team_first = random_boolean();
+    var keys = build_keys(red_team_first);
+    var game_running = false;
+    msg.reply(canned_responses[2]);
+  });
+
+  robot.respond(canned_requests[3], function(msg){
+    game_running = true;
+    msg.reply(canned_responses[8]);
+  });
 
   robot.respond(canned_requests[8], function(msg){
     msg.reply(format_board(the_board));
@@ -358,10 +378,9 @@ canned_responses = [ "The score is: ",
 "The current score is: ",
 "The game has started!",
 " team is up to guess!",
-"A timer has been started!",
+"A timer has been started!",  
 "Time left: ",
-"AWWW SHIT! TIME'S COUNTIN' DOWN! Time left: ",
-"Time left: "
+"AWWW SHIT! TIME'S COUNTIN' DOWN! Time left: "
 ];
 
 canned_errors = ["That team is full.",
