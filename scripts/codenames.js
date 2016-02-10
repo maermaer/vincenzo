@@ -1,30 +1,3 @@
-//1. setup game loop
-  // need every fxn to check if game running
-  // need funcitons that have possible game-ending states -- needs global vs. local logical check
-    // to be able to change it
-//2. allow creation of teams with team leads -- p.done
-  // allow team leaders --done
-  // setup whispering to team leaders -- needs whisper fxn
-//3. setup timers -- we sure we want this?
-//4. setup key map --done
-//5. setup board --done
-//6. allow people to choose answers --p. done
-  // update the board with chosen answers -- done
-//7. allow certain game conditions to be met (win/loss/draw)
-//8. allow game reset -- done
-//9. allow scorekeeping
-//10. allow game end
-//11. setup turn switching -- enforced or simply chosen?
-//12. setup clue giving
-//13. allow game start to lockin teams and leads
-
-// Game states:
-// a) No game running
-// b) Setting up teams, no game started
-// c) Game started
-// d) Game finished
-
-
 board_size = 5;
 
 var build_row = function(){
