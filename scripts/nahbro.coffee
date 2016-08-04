@@ -35,7 +35,7 @@ module.exports = (robot) ->
   channels = []
   groups = []
 
-  robot.respond /(naw|no|nein|negative|iie|nah|neh|your b|you) (friend|dawg|breh|bro|bruh|dog|ghost rider|bien|good|tomodachi|man|dickholefucker)$/i, (msg) ->
+  robot.respond /(naw|no|nein|negative|iie|nah|neh|your b|you) (friend|dawg|breh|bro|bruh|dog|ghost rider|bien|good|tomodachi|mah dude|brudduh|big boi|man|dickholefucker)$/i, (msg) ->
     channelName = msg.message.room
     botUser = robot.brain.userForName(hubotName)
 
